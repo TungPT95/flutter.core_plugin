@@ -1,8 +1,9 @@
 name: app_utils
 description: A new Flutter package.
 version: 0.0.1+00001
-author:
-homepage:
+authors:
+  - TungPham <phamthanhtung1995@gmail.com>
+homepage: https://tungphamthanh.netlify.com
 
 environment:
   sdk: ">=2.3.0 <3.0.0"
