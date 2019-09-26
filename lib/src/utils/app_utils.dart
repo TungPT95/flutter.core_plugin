@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
-bool isMobile() {
+bool isMobileOS() {
   return Platform.isAndroid || Platform.isIOS || Platform.isFuchsia;
 }
 
-bool isDesktop() {
-  return Platform.isAndroid || Platform.isIOS || Platform.isFuchsia;
+bool isDesktopOS() {
+  return Platform.isWindows || Platform.isLinux || Platform.isMacOS;
 }
 
 mobileLaunchUrl(url) async {
