@@ -1,4 +1,4 @@
-library app_utils;
+library core_plugin;
 
 export 'src/base_state.dart';
 export 'src/utils/text_utils.dart';
