@@ -1,8 +1,7 @@
 name: core_plugin
 description: A new Flutter package.
-version: 0.0.1+00001
-authors:
-  - TungPham <phamthanhtung1995@gmail.com>
+version: 0.0.2+00002
+author: TungPham <phamthanhtung1995@gmail.com>
 homepage: https://tungphamthanh.netlify.com
 
 environment:
@@ -11,12 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl:
-  url_launcher:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  intl:
+  url_launcher:
+  dio:
+  logger:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
