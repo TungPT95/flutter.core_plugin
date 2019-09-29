@@ -1,23 +1,28 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
-bool isMobileOS() {
-  return Platform.isAndroid || Platform.isIOS || Platform.isFuchsia;
-}
+class AppUtils {
+  static bool isMobileOS() {
+    return defaultTargetPlatform == TargetPlatform.android ||
+        defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.fuchsia;
+  }
 
-bool isDesktopOS() {
-  return Platform.isWindows || Platform.isLinux || Platform.isMacOS;
-}
+  static bool isDesktopOS() {
+    return defaultTargetPlatform != TargetPlatform.android &&
+        defaultTargetPlatform != TargetPlatform.iOS &&
+        defaultTargetPlatform == TargetPlatform.fuchsia;
+  }
 
-mobileLaunchUrl(url) async {
-  try {
-    if (await url_launcher.canLaunch(url)) {
-      await url_launcher.launch(url);
-    } else {
-      throw 'Could not launch $url';
+  static void mobileLaunchUrl(url) async {
+    try {
+      if (await url_launcher.canLaunch(url)) {
+        await url_launcher.launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      print(e.toString());
     }
-  } catch (e) {
-    print(e.toString());
   }
 }
