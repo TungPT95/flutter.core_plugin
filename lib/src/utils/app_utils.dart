@@ -10,7 +10,7 @@ bool isMobileOS() {
 bool isDesktopOS() {
   return defaultTargetPlatform != TargetPlatform.android &&
       defaultTargetPlatform != TargetPlatform.iOS &&
-      defaultTargetPlatform == TargetPlatform.fuchsia;
+      defaultTargetPlatform != TargetPlatform.fuchsia;
 }
 
 void mobileLaunchUrl(url) async {
