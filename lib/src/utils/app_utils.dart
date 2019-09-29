@@ -24,3 +24,15 @@ void mobileLaunchUrl(url) async {
     print(e.toString());
   }
 }
+
+void makeCall(phoneNumber) async {
+  try {
+    if (await url_launcher.canLaunch('tel:$phoneNumber')) {
+      await url_launcher.launch('tel:$phoneNumber');
+    } else {
+      throw 'Could not launch $phoneNumber';
+    }
+  } catch (e) {
+    print(e.toString());
+  }
+}
