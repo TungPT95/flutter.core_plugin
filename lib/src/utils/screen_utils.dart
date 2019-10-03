@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../base_state.dart';
 
 class ScreenUtils {
   static Size screenSize(context) => MediaQuery.of(context).size;
+  static ThemeData screenTheme(context) => Theme.of(context);
 
   static double scaleWidth(BuildContext context, double width) {
     return width * screenSize(context).width / designWidth;
