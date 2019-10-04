@@ -11,7 +11,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   Size get screenSize => MediaQuery.of(context).size;
 
-
   double scaleWidth(double width) {
     return width * screenSize.width / designWidth;
   }
@@ -28,7 +27,43 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     return screenSize.width * percent / 100;
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return null;
+  }
+
   double screenHeightFraction(double percent) {
     return screenSize.height * percent / 100;
   }
+
+  void pushFoResult(String route, Request request) async {
+    final result =
+    await Navigator.pushNamed<dynamic>(context, route, arguments: request);
+    if (result != null && result is Result) {
+      onPopResult(request.requestCode, result.resultCode, result.bundleResult);
+    }
+  }
+
+  void popForResult(Status status, {dynamic bundleResult}) {
+    Navigator.pop<Result>(
+        context, Result(resultCode: status, bundleResult: bundleResult));
+  }
+
+  void onPopResult(int requestCode, Status resultCode, dynamic resultBundle) {}
 }
+
+class Result {
+  Status resultCode = Status.RESULT_CANCEL;
+  dynamic bundleResult;
+
+  Result({this.resultCode, this.bundleResult});
+}
+
+class Request {
+  int requestCode;
+  dynamic bundle;
+
+  Request(this.requestCode, this.bundle);
+}
+
+enum Status { RESULT_CANCEL, RESULT_OK }
