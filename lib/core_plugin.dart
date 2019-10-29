@@ -1,6 +1,5 @@
 library core_plugin;
 
-export 'package:dio/dio.dart';
 export 'package:intl/intl.dart';
 export 'package:logger/logger.dart';
 export 'package:url_launcher/url_launcher.dart';
