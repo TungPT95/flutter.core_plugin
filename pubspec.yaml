@@ -17,6 +17,7 @@ dependencies:
   dio: ^3.0.4
   pretty_dio_logger: ^1.0.7
   dio_http2_adapter: ^1.0.0
+  dio_http_cache: ^0.2.1
   retrofit: ^1.0.1
 
   logger: ^0.7.0+2
