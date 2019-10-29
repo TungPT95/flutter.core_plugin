@@ -1,5 +1,10 @@
 library core_plugin;
 
+export 'package:dio/dio.dart';
+export 'package:intl/intl.dart';
+export 'package:logger/logger.dart';
+export 'package:url_launcher/url_launcher.dart';
+
 export 'src/base_state.dart';
 export 'src/layouts/responsive/responsive_layout.dart';
 export 'src/layouts/responsive/responsive_widget.dart';
