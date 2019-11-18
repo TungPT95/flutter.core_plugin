@@ -1,3 +1,4 @@
+import 'package:core_plugin/src/base_state.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
@@ -13,10 +14,10 @@ class ResponsiveWidget extends StatefulWidget {
   _ResponsiveWidgetState createState() => _ResponsiveWidgetState();
 }
 
-class _ResponsiveWidgetState extends State<ResponsiveWidget> {
+class _ResponsiveWidgetState extends BaseState<ResponsiveWidget> {
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraint) {
+    return buildContent(LayoutBuilder(builder: (context, constraint) {
       if (constraint.maxWidth < TABLET_WIDTH_MIN) {
         return widget.mobile ??
             Center(
@@ -34,6 +35,6 @@ class _ResponsiveWidgetState extends State<ResponsiveWidget> {
               child: Text('no desktop screen'.toUpperCase()),
             );
       }
-    });
+    }));
   }
 }

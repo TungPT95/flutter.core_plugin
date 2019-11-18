@@ -1,4 +1,8 @@
+import 'package:core_plugin/src/navigator/bundle.dart';
+import 'package:core_plugin/src/navigator/intent.dart' as intent;
+import 'package:core_plugin/src/navigator/navigator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 ///width of Iphone 5 device
 const double designWidth = 375.0;
@@ -11,45 +15,74 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   Size get screenSize => MediaQuery.of(context).size;
 
-  double scaleWidth(double width) {
-    return width * screenSize.width / designWidth;
-  }
+  double scaleWidth(double width) => width * screenSize.width / designWidth;
 
-  double scaleHeight(double height) {
-    return height * screenSize.height / designHeight;
-  }
+  double scaleHeight(double height) =>
+      height * screenSize.height / designHeight;
 
   double screenWidthRatio() => screenSize.width / designWidth;
 
   double screenHeightRatio() => screenSize.height / designHeight;
 
-  double screenWidthFraction(double percent) {
-    return screenSize.width * percent / 100;
+  double screenWidthFraction(double percent) =>
+      screenSize.width * percent / 100;
+
+  double screenHeightFraction(double percent) =>
+      screenSize.height * percent / 100;
+
+  Bundle get bundle {
+    try {
+      return Provider.of<Bundle>(context, listen: false);
+    } catch (e, s) {
+      print(s);
+    }
+    return null;
+  }
+
+  Widget buildContent(Widget content) {
+    assert(content != null);
+    return WillPopScope(
+      onWillPop: onBackPress,
+      child: content,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return null;
+    return Container();
   }
 
-  double screenHeightFraction(double percent) {
-    return screenSize.height * percent / 100;
-  }
-
-  void pushFoResult(String route, Request request) async {
-    final result =
-    await Navigator.pushNamed<dynamic>(context, route, arguments: request);
-    if (result != null && result is Result) {
-      onPopResult(request.requestCode, result.resultCode, result.bundleResult);
+  void pushScreen(intent.Intent intent) async {
+    final result = await push(intent);
+    //todo chỉ gọi [onPopResult] khi result != null và phải là Bundle class
+    if (result != null && result is Bundle) {
+      onPopResult(intent.screen, result);
     }
   }
 
-  void popForResult(Status status, {dynamic bundleResult}) {
-    Navigator.pop<Result>(
-        context, Result(resultCode: status, bundleResult: bundleResult));
+  ///[resultBundle] result trả về cho screen trước đó, khi replace screen hiện tại bởi screen khác
+  /// vd: screen1 [pushScreen] => screen2
+  /// screen2 [pushReplacementScreen] bởi screen3, thì resultBundle ở đây sẽ return cho screen1
+  void pushReplacementScreen(intent.Intent intent,
+      {Bundle resultBundle}) async {
+    final result = await pushReplacement(intent, resultBundle);
+    //todo chỉ gọi [onPopResult] khi result != null và phải là Bundle class
+    if (result != null && result is Bundle) {
+      onPopResult(intent.screen, result);
+    }
   }
 
-  void onPopResult(int requestCode, Status resultCode, dynamic resultBundle) {}
+  ///[resultBundle] kết quả trả về khi pop screen
+  void popScreen({Bundle resultBundle}) {
+    pop(intent.Intent(context, null, bundle: resultBundle));
+  }
+
+  ///[returnScreen] Type của page vừa đc push, sẽ return về result [resultBundle] từ page đó
+  void onPopResult(Type returnScreen, Bundle resultBundle) {}
+
+  void onBackPress() {
+    popScreen();
+  }
 }
 
 class Result {

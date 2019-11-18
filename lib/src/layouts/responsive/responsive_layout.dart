@@ -1,3 +1,4 @@
+import 'package:core_plugin/src/base_state.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
@@ -13,10 +14,10 @@ class ResponsiveLayout extends StatefulWidget {
   _ResponsiveLayoutState createState() => _ResponsiveLayoutState();
 }
 
-class _ResponsiveLayoutState extends State<ResponsiveLayout> {
+class _ResponsiveLayoutState extends BaseState<ResponsiveLayout> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return buildContent(Scaffold(
       body: LayoutBuilder(builder: (context, constraint) {
         if (constraint.maxWidth < TABLET_WIDTH_MIN) {
           return widget.mobile ??
@@ -36,6 +37,6 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
               );
         }
       }),
-    );
+    ));
   }
 }
