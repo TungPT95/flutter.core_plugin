@@ -22,6 +22,7 @@ export 'src/layouts/responsive/utils/layout_utils.dart';
 export 'src/navigator/navigator.dart';
 export 'src/network/network.dart';
 export 'src/utils/app_utils.dart';
+export 'src/utils/datetime_utils.dart';
 export 'src/utils/screen_utils.dart';
 export 'src/utils/text_utils.dart';
 export 'src/utils/validate_utils.dart';
