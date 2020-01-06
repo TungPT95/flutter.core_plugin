@@ -93,9 +93,13 @@ class ResponseTransformer extends Transformer {
         responseBody.isNotEmpty &&
         options.responseType == ResponseType.json &&
         _isJsonMime(response.headers[Headers.contentTypeHeader]?.first)) {
-
-    } else {
       return json.decode(responseBody);
+    } else {
+
+      try{
+        return json.decode(responseBody);
+      }  catch (e) {
+      }
     }
     return responseBody;
   }
