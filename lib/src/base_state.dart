@@ -1,3 +1,4 @@
+import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/navigator/bundle.dart';
 import 'package:core_plugin/src/navigator/intent.dart' as intent;
 import 'package:core_plugin/src/navigator/navigator.dart';
@@ -82,6 +83,57 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   void onBackPress() {
     popScreen();
+  }
+
+  void showAlertDialog({
+    bool isCancelable = true,
+    String content = '',
+    String positiveTitle,
+    void Function() onPositiveClick,
+    String negativeTitle,
+    void Function() onNegativeClick,
+  }) {
+    showDialog(
+        context: context,
+        barrierDismissible: isCancelable,
+        child: AlertDialog(
+          content: Text(
+            content,
+            textScaleFactor: screenWidthRatio(),
+          ),
+          contentPadding:
+              EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 0),
+          actions: [
+            if (isNotNullString(negativeTitle))
+              FlatButton(
+                onPressed: onNegativeClick,
+                child: Text(
+                  negativeTitle,
+                  textScaleFactor: screenWidthRatio(),
+                ),
+              ),
+            if (isNotNullString(positiveTitle))
+              FlatButton(
+                onPressed: onPositiveClick,
+                child: Text(
+                  positiveTitle,
+                  textScaleFactor: screenWidthRatio(),
+                ),
+              ),
+          ],
+        ));
+  }
+
+  /// phải truyền context b1ởi vì có những trường hợp ko phải context của Scaffold
+  showSnackBar(context, String message) {
+    Scaffold.of(context)
+        .hideCurrentSnackBar(reason: SnackBarClosedReason.remove);
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      duration: Duration(milliseconds: 1500),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ));
   }
 }
 
