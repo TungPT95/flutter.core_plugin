@@ -129,7 +129,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     Scaffold.of(context)
         .hideCurrentSnackBar(reason: SnackBarClosedReason.remove);
     Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text(message),
+      content: Text(message ?? ''),
       duration: Duration(milliseconds: 1500),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
