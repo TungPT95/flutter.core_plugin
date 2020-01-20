@@ -6,9 +6,14 @@ class LoadingWidget extends StatelessWidget {
   final bool isLoading;
   final bool isError;
   final void Function() onRetry;
+  final ErrorWidgetTheme errorWidgetTheme;
 
   LoadingWidget(
-      {this.child, this.isLoading = false, this.isError = false, this.onRetry});
+      {this.child,
+      this.isLoading = false,
+      this.isError = false,
+      this.onRetry,
+      this.errorWidgetTheme});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +23,25 @@ class LoadingWidget extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
             ),
           )
-        : isError ? ErrorWidget(onRetry: onRetry) : child;
+        : isError
+            ? ErrorWidget(
+                onRetry: onRetry,
+                buttonColor: errorWidgetTheme?.buttonRetryColor ?? Colors.blue,
+                buttonTextColor:
+                    errorWidgetTheme?.buttonRetryTextColor ?? Colors.white,
+              )
+            : child;
   }
+}
+
+class ErrorWidgetTheme {
+  final Color buttonRetryColor;
+  final Color buttonRetryTextColor;
+
+  ErrorWidgetTheme({
+    this.buttonRetryColor,
+    this.buttonRetryTextColor,
+  });
 }
 
 class ErrorWidget extends StatelessWidget {
@@ -29,10 +51,7 @@ class ErrorWidget extends StatelessWidget {
   final Color buttonTextColor;
 
   ErrorWidget(
-      {this.onRetry,
-      this.reloadTitle,
-      this.buttonColor = Colors.blue,
-      this.buttonTextColor = Colors.white});
+      {this.onRetry, this.reloadTitle, this.buttonColor, this.buttonTextColor});
 
   @override
   Widget build(BuildContext context) {
