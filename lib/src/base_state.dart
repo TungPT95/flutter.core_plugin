@@ -125,17 +125,21 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   /// phải truyền context b1ởi vì có những trường hợp ko phải context của Scaffold
-  showSnackBar(context, String message,{TextAlign textAlign}) {
+  showSnackBar(context, String message,
+      {TextAlign textAlign, SnackBarBehavior behavior}) {
     Scaffold.of(context)
         .hideCurrentSnackBar(reason: SnackBarClosedReason.remove);
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Text(
         message ?? '',
         textAlign: textAlign,
+        textScaleFactor: screenWidthRatio(),
       ),
       duration: Duration(milliseconds: 1500),
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      behavior: behavior,
+      shape: behavior == SnackBarBehavior.floating
+          ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))
+          : null,
     ));
   }
 }
