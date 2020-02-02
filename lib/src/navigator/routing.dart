@@ -6,6 +6,10 @@ import 'package:flutter/widgets.dart';
 abstract class Routing {
   Map<dynamic, dynamic> getRoutes();
 
+  String getInitRoute() {
+    return _getTypeName(getRoutes().entries.first.key);
+  }
+
   Route<Bundle> onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(
         builder: (context) {
