@@ -16,7 +16,7 @@ class ExNavigatorApp extends StatelessWidget with Routing {
   }
 
   @override
-  Map<dynamic, dynamic> getRoutes() {
+  Map<dynamic, dynamic> getRoutes(bundle) {
     return {
       Page1: Page1(
         title: 'page 1',
