@@ -4,24 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class Routing {
-  Map<dynamic, dynamic> getRoutes();
+  Map<dynamic, dynamic> getRoutes(Bundle settings);
+
+  String getInitRoute() {
+    return _getTypeName(getRoutes(null).entries.first.key);
+  }
 
   Route<Bundle> onGenerateRoute(RouteSettings settings) {
+    final bundle = (settings.arguments as Bundle) ?? Bundle.empty();
     return MaterialPageRoute(
         builder: (context) {
           return Provider<Bundle>.value(
-            child: _buildRoutes()[settings.name],
+            child: _buildRoutes(bundle)[settings.name],
             updateShouldNotify: (previous, next) => false,
-            value: (settings.arguments as Bundle) ?? Bundle.empty(),
+            value: bundle,
           );
         },
         settings: settings);
   }
 
-  Map<String, dynamic> _buildRoutes() {
-    assert(getRoutes() != null, 'need to override getRoutes()');
-    assert(getRoutes().isNotEmpty, 'getRoutes() is not empty!');
-    return getRoutes().map((key, value) {
+  Map<String, dynamic> _buildRoutes(Bundle bundle) {
+    assert(getRoutes(bundle) != null, 'need to override getRoutes()');
+    assert(getRoutes(bundle).isNotEmpty, 'getRoutes() is not empty!');
+    return getRoutes(bundle).map((key, value) {
       return MapEntry(_getTypeName(key), value);
     });
   }
