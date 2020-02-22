@@ -36,3 +36,15 @@ void makeCall(phoneNumber) async {
     print(e.toString());
   }
 }
+
+void sendEmail(email) async{
+  try {
+    if (await url_launcher.canLaunch('mailto:$email')) {
+      await url_launcher.launch('mailto:$email');
+    } else {
+      throw 'Could not launch $email';
+    }
+  } catch (e) {
+    print(e.toString());
+  }
+}

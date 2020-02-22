@@ -66,7 +66,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   /// screen2 [pushReplacementScreen] bởi screen3, thì resultBundle ở đây sẽ return cho screen1
   void pushReplacementScreen(intent.Intent intent,
       {Bundle resultBundle}) async {
-    final result = await pushReplacement(intent, resultBundle);
+    final result = await pushReplacement(intent, resultBundle: resultBundle);
     //todo chỉ gọi [onPopResult] khi result != null và phải là Bundle class
     if (result != null && result is Bundle) {
       onPopResult(intent.screen, result);

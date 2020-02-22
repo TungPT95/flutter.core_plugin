@@ -11,7 +11,7 @@ Future<Bundle> push(intent.Intent intent) {
       arguments: intent.bundle);
 }
 
-Future<Bundle> pushReplacement(intent.Intent intent, Bundle resultBundle) {
+Future<Bundle> pushReplacement(intent.Intent intent, {Bundle resultBundle}) {
   return Navigator.pushReplacementNamed<dynamic, Bundle>(
       intent.context, intent.screen.toString(),
       result: resultBundle, arguments: intent.bundle);
@@ -19,4 +19,17 @@ Future<Bundle> pushReplacement(intent.Intent intent, Bundle resultBundle) {
 
 bool pop(intent.Intent intent) {
   return Navigator.pop<Bundle>(intent.context, intent.bundle);
+}
+
+Future<Bundle> pushAndRemoveUntil(
+    intent.Intent intent, bool Function(Route<dynamic> route) predicate,
+    {Bundle resultBundle}) {
+  return Navigator.pushNamedAndRemoveUntil<Bundle>(
+      intent.context, intent.screen.toString(), predicate,
+      arguments: intent.bundle);
+}
+
+Future<Bundle> pushToFirst(intent.Intent intent, {Bundle resultBundle}) {
+  return pushAndRemoveUntil(intent, (route) => route.isFirst,
+      resultBundle: intent.bundle);
 }
