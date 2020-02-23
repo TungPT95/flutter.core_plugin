@@ -142,6 +142,11 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           : null,
     ));
   }
+
+  ///[duration] is second
+  showToast(context, String message, {int duration = 1}) {
+    Toast.show(message, context, duration: duration);
+  }
 }
 
 class Result {
