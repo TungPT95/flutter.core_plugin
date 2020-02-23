@@ -36,7 +36,7 @@ dependencies:
   flutter_widgets: ^0.1.11
   path_provider: ^1.6.1
   flutter_advanced_networkimage: ^0.7.0
-
+  toast: 0.1.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
