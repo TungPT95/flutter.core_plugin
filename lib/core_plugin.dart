@@ -28,6 +28,7 @@ export 'src/navigator/navigator.dart';
 export 'src/network/network.dart';
 export 'src/utils/app_utils.dart';
 export 'src/utils/datetime_utils.dart';
+export 'src/utils/extensions.dart';
 export 'src/utils/screen_utils.dart';
 export 'src/utils/text_utils.dart';
 export 'src/utils/validate_utils.dart';

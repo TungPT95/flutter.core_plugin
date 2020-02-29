@@ -1,11 +1,11 @@
 name: core_plugin
 description: A new Flutter package.
-version: 0.1.5+00105
+version: 0.1.6+00106
 author: TungPham <phamthanhtung1995@gmail.com>
 homepage: https://tungpt.com
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
