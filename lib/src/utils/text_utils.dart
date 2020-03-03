@@ -12,7 +12,7 @@ class TextUtil {
     final uRegex = '[ú,ù,ủ,ũ,ụ,ư,ứ,ừ,ử,ữ,ự]';
     final yRegex = '[ý,ỳ,ỷ,ỹ,ỵ]';
 
-    return input.isNull
+    String result = input.isNull
         ? ''
         : input
             .replaceAll(RegExp(aRegex), 'a')
@@ -29,6 +29,8 @@ class TextUtil {
             .replaceAll(RegExp(uRegex.toUpperCase()), 'U')
             .replaceAll(RegExp(yRegex), 'y')
             .replaceAll(RegExp(yRegex.toUpperCase()), 'Y');
+
+    return result;
   }
 }
 
