@@ -4,7 +4,7 @@ String percentFormat(double percent) => '$percent%';
 
 class TextUtil {
   static String removeVnAccent(String input) {
-    final aRegex = '[á,à,ả,ã,ạ,â,ấ,ầ,ẩ,ẫ,ậ,ă,ắ,ằ,ẳ,ẵ,ặ]';
+    final aRegex = '[áàả,ã,ạ,â,ấ,ầ,ẩ,ẫ,ậ,ă,ắ,ằ,ẳ,ẵ,ặ]';
     final dRegex = '[đ]';
     final eRegex = '[é,è,ẻ,ẽ,ẹ,ê,ế,ề,ể,ễ,ệ]';
     final iRegex = '[í,ì,ỉ,ĩ,ị]';
@@ -15,24 +15,24 @@ class TextUtil {
     return input.isNull
         ? ''
         : input
-            .replaceAll(
-                RegExp(aRegex.plus('|').plus(aRegex.toUpperCase())), 'a')
-            .replaceAll(
-                RegExp(dRegex.plus('|').plus(dRegex.toUpperCase())), 'd')
-            .replaceAll(
-                RegExp(eRegex.plus('|').plus(eRegex.toUpperCase())), 'e')
-            .replaceAll(
-                RegExp(iRegex.plus('|').plus(iRegex.toUpperCase())), 'i')
-            .replaceAll(
-                RegExp(oRegex.plus('|').plus(oRegex.toUpperCase())), 'o')
-            .replaceAll(
-                RegExp(uRegex.plus('|').plus(uRegex.toUpperCase())), 'u')
-            .replaceAll(
-                RegExp(yRegex.plus('|').plus(yRegex.toUpperCase())), 'y');
+            .replaceAll(RegExp(aRegex), 'a')
+            .replaceAll(RegExp(aRegex.toUpperCase()), 'A')
+            .replaceAll(RegExp(dRegex), 'd')
+            .replaceAll(RegExp(dRegex.toUpperCase()), 'D')
+            .replaceAll(RegExp(eRegex), 'e')
+            .replaceAll(RegExp(eRegex.toUpperCase()), 'E')
+            .replaceAll(RegExp(iRegex), 'i')
+            .replaceAll(RegExp(iRegex.toUpperCase()), 'I')
+            .replaceAll(RegExp(oRegex), 'o')
+            .replaceAll(RegExp(oRegex.toUpperCase()), 'O')
+            .replaceAll(RegExp(uRegex), 'u')
+            .replaceAll(RegExp(uRegex.toUpperCase()), 'U')
+            .replaceAll(RegExp(yRegex), 'y')
+            .replaceAll(RegExp(yRegex.toUpperCase()), 'Y');
   }
 }
 
 void main() {
-  final abc = TextUtil.removeVnAccent('đẵỉêỹôữỨ');
+  final abc = TextUtil.removeVnAccent('àá ẮảđẵỉêỹôữỨ');
   print('[TUNG] ===> $abc');
 }
