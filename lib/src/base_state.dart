@@ -97,6 +97,9 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         context: context,
         barrierDismissible: isCancelable,
         child: AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(scaleWidth(6))
+          ),
           content: Text(
             content,
             textScaleFactor: screenWidthRatio(),
@@ -115,6 +118,9 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
             if (isNotNullString(positiveTitle))
               FlatButton(
                 onPressed: onPositiveClick,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(scaleWidth(6))
+                ),
                 child: Text(
                   positiveTitle,
                   textScaleFactor: screenWidthRatio(),
