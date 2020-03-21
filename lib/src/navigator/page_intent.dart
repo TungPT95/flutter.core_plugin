@@ -1,11 +1,11 @@
 import 'package:core_plugin/src/navigator/bundle.dart';
 import 'package:flutter/widgets.dart';
 
-class Intent {
+class PageIntent {
   final BuildContext context;
   final Type screen;
 
   Bundle bundle;
 
-  Intent(this.context, this.screen, {this.bundle});
+  PageIntent(this.context, this.screen, {this.bundle});
 }

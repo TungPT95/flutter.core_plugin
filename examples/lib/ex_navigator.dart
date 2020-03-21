@@ -92,7 +92,7 @@ class _Page2State extends BaseState<Page2> {
 //            setResult(corePlugin.Bundle('result ne'));
 //            popScreen();
             //todo pop replacement with returning result
-            pushReplacementScreen(corePlugin.Intent(context, Page2),
+            pushReplacementScreen(corePlugin.PageIntent(context, Page2),
                 resultBundle: corePlugin.Bundle('result ne'));
           },
           child: Text('pop vao day'),
@@ -121,7 +121,7 @@ class _Page1State extends BaseState<Page1> {
       body: Center(
         child: RaisedButton(
           onPressed: () async {
-            pushScreen(corePlugin.Intent(context, Page2));
+            pushScreen(corePlugin.PageIntent(context, Page2));
 //            pushForResult(corePlugin.Intent(context, Page2,
 //                bundle: corePlugin.Bundle('String ne')));
           },

@@ -25,6 +25,7 @@ export 'src/layouts/responsive/responsive_layout.dart';
 export 'src/layouts/responsive/responsive_widget.dart';
 export 'src/layouts/responsive/utils/layout_utils.dart';
 export 'src/navigator/navigator.dart';
+export 'src/navigator/page_intent.dart';
 export 'src/network/network.dart';
 export 'src/utils/app_utils.dart';
 export 'src/utils/datetime_utils.dart';

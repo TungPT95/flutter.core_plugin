@@ -1,7 +1,7 @@
 import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/navigator/bundle.dart';
-import 'package:core_plugin/src/navigator/intent.dart' as intent;
 import 'package:core_plugin/src/navigator/navigator.dart';
+import 'package:core_plugin/src/navigator/page_intent.dart' as intent;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,7 +53,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     return Container();
   }
 
-  void pushScreen(intent.Intent intent) async {
+  void pushScreen(intent.PageIntent intent) async {
     final result = await push(intent);
     //todo chỉ gọi [onPopResult] khi result != null và phải là Bundle class
     if (result != null && result is Bundle) {
@@ -64,7 +64,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   ///[resultBundle] result trả về cho screen trước đó, khi replace screen hiện tại bởi screen khác
   /// vd: screen1 [pushScreen] => screen2
   /// screen2 [pushReplacementScreen] bởi screen3, thì resultBundle ở đây sẽ return cho screen1
-  void pushReplacementScreen(intent.Intent intent,
+  void pushReplacementScreen(intent.PageIntent intent,
       {Bundle resultBundle}) async {
     final result = await pushReplacement(intent, resultBundle: resultBundle);
     //todo chỉ gọi [onPopResult] khi result != null và phải là Bundle class
@@ -75,7 +75,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   ///[resultBundle] kết quả trả về khi pop screen
   void popScreen({Bundle resultBundle}) {
-    pop(intent.Intent(context, null, bundle: resultBundle));
+    pop(intent.PageIntent(context, null, bundle: resultBundle));
   }
 
   ///[returnScreen] Type của page vừa đc push, sẽ return về result [resultBundle] từ page đó
