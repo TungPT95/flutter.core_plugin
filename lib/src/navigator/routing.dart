@@ -24,7 +24,7 @@ abstract class Routing {
   }
 
   Map<String, dynamic> _buildRoutes(Bundle bundle) {
-    assert(getRoutes(bundle) != null, 'need to override getRoutes()');
+    assert(getRoutes(bundle).isNotNull, 'need to override getRoutes()');
     assert(getRoutes(bundle).isNotEmpty, 'getRoutes() is not empty!');
     return getRoutes(bundle).map((key, value) {
       return MapEntry(_getTypeName(key), value);
