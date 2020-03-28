@@ -32,6 +32,12 @@ class TextUtil {
 
     return result;
   }
+
+  ///chuỗi [source] có bao gồm [keyword] hay ko
+  static bool contains(String source, String keyword) {
+    return removeVnAccent(source.trim().toLowerCase())
+        .contains(removeVnAccent(keyword.trim().toLowerCase()));
+  }
 }
 
 void main() {
