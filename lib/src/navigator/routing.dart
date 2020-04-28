@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class Routing {
+  ///override ở main, để get Map của all screen trong app
   Map<dynamic, dynamic> getRoutes(Bundle settings);
 
+  ///gọi để set ở [MaterialApp.initialRoute]
   String getInitRoute() {
     return _getTypeName(getRoutes(null).entries.first.key);
   }
 
+  ///gọi để set ở [MaterialApp.onGenerateRoute]
   Route<Bundle> onGenerateRoute(RouteSettings settings) {
     final bundle = (settings.arguments as Bundle) ?? Bundle.empty();
     return MaterialPageRoute(
