@@ -5,34 +5,27 @@ import 'package:flutter/widgets.dart';
 
 abstract class Routing {
   ///override ở main, để get Map của all screen trong app
-  Map<dynamic, dynamic> getRoutes(Bundle settings);
-
-  ///gọi để set ở [MaterialApp.initialRoute]
-  String getInitRoute() {
-    return _getTypeName(getRoutes(null).entries.first.key);
-  }
+  Widget getRoutes(Type screen) => screenNotFound;
 
   ///gọi để set ở [MaterialApp.onGenerateRoute]
   Route<Bundle> onGenerateRoute(RouteSettings settings) {
-    final bundle = (settings.arguments as Bundle) ?? Bundle.empty();
+    final intent = settings.arguments as PageIntent;
+    final bundle = intent?.bundle ?? Bundle.empty();
+
     return MaterialPageRoute(
         builder: (context) {
           return Provider<Bundle>.value(
-            child: _buildRoutes(bundle)[settings.name],
+            child: getRoutes(intent?.screen),
             updateShouldNotify: (previous, next) => false,
             value: bundle,
           );
         },
         settings: settings);
   }
-
-  Map<String, dynamic> _buildRoutes(Bundle bundle) {
-    assert(getRoutes(bundle).isNotNull, 'need to override getRoutes()');
-    assert(getRoutes(bundle).isNotEmpty, 'getRoutes() is not empty!');
-    return getRoutes(bundle).map((key, value) {
-      return MapEntry(_getTypeName(key), value);
-    });
-  }
-
-  String _getTypeName(Type type) => type.toString();
 }
+
+Widget screenNotFound = Material(
+  child: Center(
+    child: Text('Screen is not found!'),
+  ),
+);

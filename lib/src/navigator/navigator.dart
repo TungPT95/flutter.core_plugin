@@ -12,7 +12,7 @@ Future<Bundle> push(intent.PageIntent intent) {
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
   return Navigator.pushNamed<Bundle>(intent.context, intent.screen.toString(),
-      arguments: intent.bundle);
+      arguments: intent);
 }
 
 Future<Bundle> pushReplacement(intent.PageIntent intent,
@@ -22,7 +22,7 @@ Future<Bundle> pushReplacement(intent.PageIntent intent,
   assert(intent.screen.isNotNull);
   return Navigator.pushReplacementNamed<dynamic, Bundle>(
       intent.context, intent.screen.toString(),
-      result: resultBundle, arguments: intent.bundle);
+      result: resultBundle, arguments: intent);
 }
 
 bool pop(intent.PageIntent intent) {
@@ -34,20 +34,18 @@ bool pop(intent.PageIntent intent) {
 }
 
 Future<Bundle> pushAndRemoveUntil(
-    intent.PageIntent intent, bool Function(Route<dynamic> route) predicate,
-    {Bundle resultBundle}) {
+    intent.PageIntent intent, bool Function(Route<dynamic> route) predicate) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
   return Navigator.pushNamedAndRemoveUntil<Bundle>(
       intent.context, intent.screen.toString(), predicate,
-      arguments: intent.bundle);
+      arguments: intent);
 }
 
 Future<Bundle> pushToFirst(intent.PageIntent intent, {Bundle resultBundle}) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
-  return pushAndRemoveUntil(intent, (route) => route.isFirst,
-      resultBundle: intent.bundle);
+  return pushAndRemoveUntil(intent, (route) => route.isFirst);
 }
