@@ -25,12 +25,11 @@ Future<Bundle> pushReplacement(intent.PageIntent intent,
       result: resultBundle, arguments: intent);
 }
 
-bool pop(intent.PageIntent intent) {
+void pop(intent.PageIntent intent) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   if (Navigator.canPop(intent.context))
-    return Navigator.pop<Bundle>(intent.context, intent.bundle);
-  return false;
+    Navigator.pop<Bundle>(intent.context, intent.bundle);
 }
 
 Future<Bundle> pushAndRemoveUntil(
