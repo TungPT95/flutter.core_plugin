@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:core_plugin/core_plugin.dart';
+import 'package:flutter/material.dart';
 
 class ExVisibleDetector extends StatefulWidget {
   static Widget newInstance() => MaterialApp(
@@ -12,7 +12,7 @@ class ExVisibleDetector extends StatefulWidget {
   _ExVisibleDetectorState createState() => new _ExVisibleDetectorState();
 }
 
-class _ExVisibleDetectorState extends BaseState<ExVisibleDetector> {
+class _ExVisibleDetectorState extends BaseAppState<ExVisibleDetector> {
   @override
   void initState() {
     super.initState();
