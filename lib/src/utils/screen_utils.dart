@@ -5,7 +5,10 @@ import '../base_state.dart';
 
 class ScreenUtils {
   static Size screenSize(context) => MediaQuery.of(context).size;
+
   static ThemeData screenTheme(context) => Theme.of(context);
+
+  static TextTheme textTheme(context) => screenTheme(context).textTheme;
 
   static double scaleWidth(BuildContext context, double width) {
     return width * screenSize(context).width / designWidth;
