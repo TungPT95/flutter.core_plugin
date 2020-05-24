@@ -55,6 +55,7 @@ Future<Bundle> pushToTop(PageIntent intent) {
 void popUntil(PageIntent intent) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
+  assert(intent.screen.isNotNull);
   Navigator.popUntil(
       intent.context, ModalRoute.withName(intent.screen.toString()));
 }
