@@ -1,13 +1,7 @@
 import 'package:core_plugin/core_plugin.dart';
-import 'package:core_plugin/src/navigator/bundle.dart';
-import 'package:core_plugin/src/navigator/page_intent.dart' as intent;
 import 'package:flutter/widgets.dart';
 
-export 'bundle.dart';
-export 'page_intent.dart';
-export 'routing.dart';
-
-Future<Bundle> push(intent.PageIntent intent) {
+Future<Bundle> push(PageIntent intent) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
@@ -15,8 +9,7 @@ Future<Bundle> push(intent.PageIntent intent) {
       arguments: intent);
 }
 
-Future<Bundle> pushReplacement(intent.PageIntent intent,
-    {Bundle resultBundle}) {
+Future<Bundle> pushReplacement(PageIntent intent, {Bundle resultBundle}) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
@@ -25,15 +18,16 @@ Future<Bundle> pushReplacement(intent.PageIntent intent,
       result: resultBundle, arguments: intent);
 }
 
-void pop(intent.PageIntent intent) {
+void pop(PageIntent intent) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   if (Navigator.canPop(intent.context))
     Navigator.pop<Bundle>(intent.context, intent.bundle);
 }
 
+///push screen mới và pop các screen trước đó đến khi thoả điều kiện [predicate]
 Future<Bundle> pushAndRemoveUntil(
-    intent.PageIntent intent, bool Function(Route<dynamic> route) predicate) {
+    PageIntent intent, bool Function(Route<dynamic> route) predicate) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
@@ -42,9 +36,25 @@ Future<Bundle> pushAndRemoveUntil(
       arguments: intent);
 }
 
-Future<Bundle> pushToFirst(intent.PageIntent intent, {Bundle resultBundle}) {
+///push screen và pop đến khi gặp screen đầu tiên thì không pop nữa
+Future<Bundle> pushToFirst(PageIntent intent) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
   return pushAndRemoveUntil(intent, (route) => route.isFirst);
+}
+
+///push screen mới lên top of stack
+Future<Bundle> pushToTop(PageIntent intent) {
+  assert(intent.isNotNull);
+  assert(intent.context.isNotNull);
+  assert(intent.screen.isNotNull);
+  return pushAndRemoveUntil(intent, (route) => false);
+}
+///pop screen đến khi gặp [intent.screen] thì ko pop nữa
+void popUntil(PageIntent intent) {
+  assert(intent.isNotNull);
+  assert(intent.context.isNotNull);
+  Navigator.popUntil(
+      intent.context, ModalRoute.withName(intent.screen.toString()));
 }
