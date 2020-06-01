@@ -30,7 +30,6 @@ export 'src/layouts/responsive/utils/layout_utils.dart';
 export 'src/navigator/bundle.dart';
 export 'src/navigator/navigator.dart';
 export 'src/navigator/page_intent.dart';
-export 'src/navigator/page_intent.dart';
 export 'src/navigator/routing.dart';
 export 'src/network/network.dart';
 export 'src/utils/app_utils.dart';
