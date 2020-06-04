@@ -23,3 +23,8 @@ extension MultipartFileExtension on MultipartFile {
       MultipartFile.fromFileSync(file.path,
           filename: file.path.split(Platform.pathSeparator).last);
 }
+
+extension IntExtension on int {
+  DateTime get toDateTimeFromServer =>
+      DateTime.fromMillisecondsSinceEpoch((this ?? 0) * 1000);
+}
