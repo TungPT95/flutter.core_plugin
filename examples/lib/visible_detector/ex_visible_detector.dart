@@ -12,7 +12,7 @@ class ExVisibleDetector extends StatefulWidget {
   _ExVisibleDetectorState createState() => new _ExVisibleDetectorState();
 }
 
-class _ExVisibleDetectorState extends BaseAppState<ExVisibleDetector> {
+class _ExVisibleDetectorState extends BaseState<ExVisibleDetector> {
   @override
   void initState() {
     super.initState();
