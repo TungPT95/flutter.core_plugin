@@ -2,7 +2,7 @@ import 'package:core_plugin/core_plugin.dart';
 import 'package:intl/intl.dart';
 
 class CurrencyUtils {
-  static String currencyFormat(double amount, String local, String pattern) =>
+  static String currencyFormat(dynamic amount, String local, String pattern) =>
       NumberFormat.currency(
               locale: local, customPattern: pattern, decimalDigits: 0)
           .format(amount);
