@@ -1,8 +1,10 @@
+import 'package:core_plugin/core_plugin.dart';
 import 'package:intl/intl.dart';
 
-class CurrencyFormat {
+class CurrencyUtils {
   static String currencyFormat(double amount, String local, String pattern) =>
-      NumberFormat.currency(locale: local, customPattern: pattern)
+      NumberFormat.currency(
+              locale: local, customPattern: pattern, decimalDigits: 0)
           .format(amount);
 
   ///format theo [amount]VND
@@ -14,4 +16,7 @@ class CurrencyFormat {
   ///vd: 1000 => 1.000đ
   static String formatDONG(double amount) =>
       currencyFormat(amount, 'vi', '#,###đ');
+
+  static String formatVNDWithCustomUnit(dynamic amount, {String unit = ''}) =>
+      currencyFormat(amount, 'vi', '#,###${unit.isNullOrEmpty ? '' : unit}');
 }

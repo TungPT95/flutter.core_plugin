@@ -33,6 +33,7 @@ export 'src/navigator/page_intent.dart';
 export 'src/navigator/routing.dart';
 export 'src/network/network.dart';
 export 'src/utils/app_utils.dart';
+export 'src/utils/currency_utils.dart';
 export 'src/utils/datetime_utils.dart';
 export 'src/utils/extensions.dart';
 export 'src/utils/screen_utils.dart';
