@@ -9,12 +9,12 @@ class CurrencyUtils {
 
   ///format theo [amount]VND
   ///vd: 1000 => 1.000VND
-  static String formatVND(double amount) =>
+  static String formatVND(dynamic amount) =>
       currencyFormat(amount, 'vi', '#,###VND');
 
   ///format to [amount]đ
   ///vd: 1000 => 1.000đ
-  static String formatDONG(double amount) =>
+  static String formatDONG(dynamic amount) =>
       currencyFormat(amount, 'vi', '#,###đ');
 
   static String formatVNDWithCustomUnit(dynamic amount, {String unit = ''}) =>
