@@ -11,6 +11,8 @@ extension ObjectUtils on Object {
 extension StringExtension on String {
   bool get isNullOrEmpty => this.isNull || this.isEmpty;
 
+  bool get isNotNullAndEmpty => !this.isNullOrEmpty;
+
   String plus(String s) => this + s;
 
   String removeVnAccent() {
