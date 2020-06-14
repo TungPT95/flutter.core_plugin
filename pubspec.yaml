@@ -14,7 +14,7 @@ dependencies:
   intl: ^0.16.1
   url_launcher: ^5.4.10
 
-# dio, http request
+  # dio, http request
   dio: ^3.0.9
   pretty_dio_logger: ^1.1.1
   dio_http2_adapter: ^1.0.0
@@ -24,11 +24,13 @@ dependencies:
   logger: ^0.9.1
   equatable: ^1.2.0
 
-# bloc, state management
+  # bloc, state management
   flutter_bloc: ^4.0.0
   bloc_test: ^5.1.0
 
-# json serializable
+  rxdart: ^0.24.1
+
+  # json serializable
   json_annotation: ^3.0.1
 
   shared_preferences: ^0.5.7+3
@@ -36,8 +38,10 @@ dependencies:
 
   flutter_widgets: ^0.1.12
   path_provider: ^1.6.10
-  flutter_advanced_networkimage: ^0.7.0
   toast: 0.1.5
+  permission_handler: ^5.0.1
+  sticky_headers: ^0.1.8+1
+  image_picker: ^0.6.7+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,7 +53,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-# To add assets to your package, add an assets section, like this:
+  # To add assets to your package, add an assets section, like this:
   assets:
     - assets/error.png
 #
