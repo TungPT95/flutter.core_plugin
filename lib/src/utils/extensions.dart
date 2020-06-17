@@ -48,6 +48,8 @@ extension StringExtension on String {
 
 extension ListExtension on List {
   bool get isNullOrEmpty => this.isNull || this.isEmpty;
+
+  bool get isNotNullAndEmpty => !this.isNullOrEmpty;
 }
 
 extension MultipartFileExtension on MultipartFile {
