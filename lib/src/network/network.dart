@@ -6,18 +6,22 @@ import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class Network {
-  static Dio dio(String baseUrl, {int connectTimeout = 60 * 1000}) =>
-      Dio(BaseOptions(baseUrl: baseUrl, connectTimeout: connectTimeout))
-        ..interceptors.addAll([
-          PrettyDioLogger(requestBody: true, responseHeader: true),
-        ])
-        ..transformer = ResponseTransformer();
+abstract class Network {
+  Dio _dio;
+
+  Dio get dio => _dio;
+
+  Network(String baseUrl, {int connectTimeout}) {
+    _dio = Dio(BaseOptions(
+        baseUrl: baseUrl, connectTimeout: connectTimeout ?? 60 * 1000))
+      ..interceptors.addAll([
+        PrettyDioLogger(requestBody: true, responseHeader: true),
+      ])
+      ..transformer = ResponseTransformer();
+  }
 }
 
-
 class ResponseTransformer extends Transformer {
-
   @override
   Future<String> transformRequest(RequestOptions options) async {
     var data = options.data ?? "";
@@ -95,11 +99,9 @@ class ResponseTransformer extends Transformer {
         _isJsonMime(response.headers[Headers.contentTypeHeader]?.first)) {
       return json.decode(responseBody);
     } else {
-
-      try{
+      try {
         return json.decode(responseBody);
-      }  catch (e) {
-      }
+      } catch (e) {}
     }
     return responseBody;
   }
