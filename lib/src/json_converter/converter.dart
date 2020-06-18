@@ -28,10 +28,10 @@ int parseDynamicToInt(input) {
     try {
       return int.tryParse(input);
     } catch (e) {
-      return -1;
+      return null;
     }
   } else
-    return -1;
+    return null;
 }
 
 int parseDynamicToSecond(input) {
@@ -41,8 +41,8 @@ int parseDynamicToSecond(input) {
     try {
       return DateTime.parse(input).millisecondsSinceEpoch ~/ 1000;
     } catch (e) {
-      return -1;
+      return null;
     }
   } else
-    return -1;
+    return null;
 }
