@@ -13,11 +13,11 @@ class Converter<T> implements JsonConverter<T, Object> {
       JsonConverterBuilder.instance?.factory?.toJson<T>(object);
 }
 
-bool decodeBoolFromInt(int input) {
+bool parseBoolFromInt(int input) {
   return input == 1;
 }
 
-int encodeBoolToInt(bool input) {
+int parseBoolToInt(bool input) {
   return input ? 1 : 0;
 }
 
