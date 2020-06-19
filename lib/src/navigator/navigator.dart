@@ -26,8 +26,7 @@ void pop(PageIntent intent) {
 }
 
 ///push screen mới và pop các screen trước đó đến khi thoả điều kiện [predicate]
-Future<Bundle> pushAndRemoveUntil(
-    PageIntent intent, bool Function(Route<dynamic> route) predicate) {
+Future<Bundle> pushAndRemoveUntil(PageIntent intent, RoutePredicate predicate) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
@@ -51,11 +50,29 @@ Future<Bundle> pushToTop(PageIntent intent) {
   assert(intent.screen.isNotNull);
   return pushAndRemoveUntil(intent, (route) => false);
 }
+
 ///pop screen đến khi gặp [intent.screen] thì ko pop nữa
-void popUntil(PageIntent intent) {
+void popUntilScreen(PageIntent intent) {
   assert(intent.isNotNull);
   assert(intent.context.isNotNull);
   assert(intent.screen.isNotNull);
-  Navigator.popUntil(
-      intent.context, ModalRoute.withName(intent.screen.toString()));
+  popUntil(intent, ModalRoute.withName(intent.screen.toString()));
+}
+
+///pop screen đến khi gặp [intent.screen] thì ko pop nữa
+///nếu [intent.screen] == null, thì sẽ pop tới trang đầu tiên
+void popUntilScreenOrFirst(PageIntent intent) {
+  assert(intent.isNotNull);
+  assert(intent.context.isNotNull);
+  assert(intent.screen.isNotNull);
+  Navigator.popUntil(intent.context, (route) {
+    return '${intent.screen}' == route.settings.name || route.isFirst;
+  });
+}
+
+///pop screen đến khi gặp [intent.screen] thì thoả điều kiện của [predicate] thì mới dừng pop
+void popUntil(PageIntent intent, RoutePredicate predicate) {
+  assert(intent.isNotNull);
+  assert(intent.context.isNotNull);
+  Navigator.popUntil(intent.context, predicate);
 }
