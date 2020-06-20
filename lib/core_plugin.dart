@@ -6,6 +6,7 @@ export 'package:dio_http2_adapter/dio_http2_adapter.dart';
 export 'package:dio_http_cache/dio_http_cache.dart';
 export 'package:equatable/equatable.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:flutter_html/flutter_html.dart';
 export 'package:flutter_widgets/flutter_widgets.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:intl/intl.dart';
