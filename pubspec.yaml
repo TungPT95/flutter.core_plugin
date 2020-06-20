@@ -42,7 +42,7 @@ dependencies:
   permission_handler: ^5.0.1
   sticky_headers: ^0.1.8+1
   image_picker: ^0.6.7+2
-  flutter_html: ^1.0.0
+  flutter_widget_from_html_core: ^0.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
