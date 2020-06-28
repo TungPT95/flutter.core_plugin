@@ -12,28 +12,10 @@ const double designWidth = 375.0;
 const double designHeight = 667.0;
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
-  ThemeData get theme => Theme.of(context);
-
-  Size get screenSize => MediaQuery.of(context).size;
-
-  double scaleWidth(double width) => width * screenSize.width / designWidth;
-
-  double scaleHeight(double height) =>
-      height * screenSize.height / designHeight;
-
-  double screenWidthRatio() => screenSize.width / designWidth;
-
-  double screenHeightRatio() => screenSize.height / designHeight;
-
-  double screenWidthFraction(double percent) =>
-      screenSize.width * percent / 100;
-
-  double screenHeightFraction(double percent) =>
-      screenSize.height * percent / 100;
 
   Bundle get bundle {
     try {
-      return Provider.of<Bundle>(context, listen: false);
+      return context.read<Bundle>();
     } catch (e, s) {
       print(s);
     }
@@ -98,30 +80,30 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         barrierDismissible: isCancelable,
         child: AlertDialog(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(scaleWidth(6))),
+              borderRadius: BorderRadius.circular(context.scaleWidth(6))),
           content: Text(
             content,
-            textScaleFactor: screenWidthRatio(),
+            textScaleFactor: context.screenWidthRatio,
           ),
           contentPadding:
-          EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 0),
+              EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 0),
           actions: [
             if (isNotNullString(negativeTitle))
               FlatButton(
                 onPressed: onNegativeClick,
                 child: Text(
                   negativeTitle,
-                  textScaleFactor: screenWidthRatio(),
+                  textScaleFactor: context.screenWidthRatio,
                 ),
               ),
             if (isNotNullString(positiveTitle))
               FlatButton(
                 onPressed: onPositiveClick,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(scaleWidth(6))),
+                    borderRadius: BorderRadius.circular(context.scaleWidth(6))),
                 child: Text(
                   positiveTitle,
-                  textScaleFactor: screenWidthRatio(),
+                  textScaleFactor: context.screenWidthRatio,
                 ),
               ),
           ],
@@ -129,7 +111,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   /// phải truyền context b1ởi vì có những trường hợp ko phải context của Scaffold
-  showSnackBar(context, String message,
+  showSnackBar(BuildContext context, String message,
       {TextAlign textAlign, SnackBarBehavior behavior}) {
     Scaffold.of(context)
         .hideCurrentSnackBar(reason: SnackBarClosedReason.remove);
@@ -137,7 +119,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
       content: Text(
         message ?? '',
         textAlign: textAlign,
-        textScaleFactor: screenWidthRatio(),
+        textScaleFactor: context.screenWidthRatio,
       ),
       duration: Duration(milliseconds: 1500),
       behavior: behavior,
