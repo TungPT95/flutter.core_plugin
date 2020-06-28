@@ -1,6 +1,46 @@
 import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/json_converter/json_converter_builder.dart';
 
+/// cách sử dụng
+///
+/// Trường hợp [T] là object
+///import 'package:core_plugin/core_plugin.dart';
+///
+///part 'object_response.g.dart';
+///
+///@JsonSerializable(fieldRename: FieldRename.snake)
+///class ObjectResponse<T> {
+///  @Converter()
+///  @JsonKey(defaultValue: {})
+///  T data;
+///
+///  ObjectResponse({this.data});
+///
+///  factory ObjectResponse.fromJson(Map<String, dynamic> json) =>
+///      _$ObjectResponseFromJson<T>(json);
+///
+///  Map<String, dynamic> toJson() => _$ObjectResponseToJson<T>(this);
+///}
+///
+/// Trường hợp [T] là 1 item trong List (hoặc là List<T>)
+///
+///import 'package:core_plugin/core_plugin.dart';
+///
+///part 'array_response.g.dart';
+///
+///@JsonSerializable(fieldRename: FieldRename.snake)
+///class ArrayResponse<T> {
+///  @Converter()
+///  @JsonKey(defaultValue: [])
+///  List<T> data;
+///
+///  ArrayResponse({this.data});
+///
+///  factory ArrayResponse.fromJson(Map<String, dynamic> json) =>
+///      _$ArrayResponseFromJson<T>(json);
+///
+///  Map<String, dynamic> toJson() => _$ArrayResponseToJson<T>(this);
+///}
 class Converter<T> implements JsonConverter<T, Object> {
   const Converter();
 
