@@ -44,6 +44,15 @@ extension StringExtension on String {
 
     return result;
   }
+
+  ///chuỗi string này có tồn tại [keyword] hay ko
+  bool contains(String keyword) {
+    return this
+        .removeVnAccent()
+        .trim()
+        .toLowerCase()
+        .contains(keyword.removeVnAccent().trim().toLowerCase());
+  }
 }
 
 extension ListExtension on List {
