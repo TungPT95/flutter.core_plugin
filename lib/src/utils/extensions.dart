@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+
+import '../base_state.dart';
 
 extension ObjectUtils on Object {
   bool get isNull => this == null;
@@ -72,4 +75,32 @@ extension IntExtension on int {
       DateTime.fromMillisecondsSinceEpoch((this ?? 0) * 1000);
 
   DateTime get toDateTime => DateTime.fromMillisecondsSinceEpoch(this ?? 0);
+}
+
+extension BuildContextExtension on BuildContext {
+  Size get screenSize => MediaQuery.of(this).size;
+
+  ThemeData get screenTheme => Theme.of(this);
+
+  TextTheme get textTheme => screenTheme.textTheme;
+
+  double scaleWidth(double width) {
+    return width * screenSize.width / designWidth;
+  }
+
+  double scaleHeight(double height) {
+    return height * screenSize.height / designHeight;
+  }
+
+  double get screenWidthRatio => screenSize.width / designWidth;
+
+  double get screenHeightRatio => screenSize.height / designHeight;
+
+  double screenWidthFraction(double percent) {
+    return screenSize.width * percent / 100;
+  }
+
+  double screenHeightFraction(double percent) {
+    return screenSize.height * percent / 100;
+  }
 }

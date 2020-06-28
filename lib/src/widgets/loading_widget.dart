@@ -66,13 +66,13 @@ class ErrorWidget extends StatelessWidget {
             child: Image.asset(
               'assets/error.png',
               package: 'core_plugin',
-              width: ScreenUtils.scaleWidth(context, 64),
-              height: ScreenUtils.scaleHeight(context, 64),
+              width: context.scaleWidth(64),
+              height: context.scaleHeight(64),
             ),
           ),
           SizedBox(
-            height: ScreenUtils.scaleHeight(context, 42),
-            width: ScreenUtils.scaleHeight(context, 100),
+            height: context.scaleHeight(42),
+            width: context.scaleHeight(100),
             child: RaisedButton(
               onPressed: onRetry,
               color: buttonColor,
