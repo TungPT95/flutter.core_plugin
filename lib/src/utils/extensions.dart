@@ -61,4 +61,6 @@ extension MultipartFileExtension on MultipartFile {
 extension IntExtension on int {
   DateTime get toDateTimeFromServer =>
       DateTime.fromMillisecondsSinceEpoch((this ?? 0) * 1000);
+
+  DateTime get toDateTime => DateTime.fromMillisecondsSinceEpoch(this ?? 0);
 }
