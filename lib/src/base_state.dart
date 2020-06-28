@@ -1,7 +1,7 @@
 import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/navigator/bundle.dart';
 import 'package:core_plugin/src/navigator/navigator.dart';
-import 'package:core_plugin/src/navigator/page_intent.dart' as intent;
+import 'package:core_plugin/src/navigator/page_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,8 +53,8 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     return Container();
   }
 
-  void pushScreen(intent.PageIntent intent) async {
-    final result = await push(intent);
+  void pushScreen(PageIntent intent) async {
+    final result = await context.push(intent);
     //todo chỉ gọi [onPopResult] khi result != null và phải là Bundle class
     if (result != null && result is Bundle) {
       onPopResult(intent.screen, result);
@@ -64,9 +64,9 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   ///[resultBundle] result trả về cho screen trước đó, khi replace screen hiện tại bởi screen khác
   /// vd: screen1 [pushScreen] => screen2
   /// screen2 [pushReplacementScreen] bởi screen3, thì resultBundle ở đây sẽ return cho screen1
-  void pushReplacementScreen(intent.PageIntent intent,
-      {Bundle resultBundle}) async {
-    final result = await pushReplacement(intent, resultBundle: resultBundle);
+  void pushReplacementScreen(PageIntent intent, {Bundle resultBundle}) async {
+    final result =
+        await context.pushReplacement(intent, resultBundle: resultBundle);
     //todo chỉ gọi [onPopResult] khi result != null và phải là Bundle class
     if (result != null && result is Bundle) {
       onPopResult(intent.screen, result);
@@ -75,7 +75,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   ///[resultBundle] kết quả trả về khi pop screen
   void popScreen({Bundle resultBundle}) {
-    pop(intent.PageIntent(context, null, bundle: resultBundle));
+    context.pop(PageIntent(bundle: resultBundle));
   }
 
   ///[returnScreen] Type của page vừa đc push, sẽ return về result [resultBundle] từ page đó
@@ -98,14 +98,13 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         barrierDismissible: isCancelable,
         child: AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(scaleWidth(6))
-          ),
+              borderRadius: BorderRadius.circular(scaleWidth(6))),
           content: Text(
             content,
             textScaleFactor: screenWidthRatio(),
           ),
           contentPadding:
-              EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 0),
+          EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 0),
           actions: [
             if (isNotNullString(negativeTitle))
               FlatButton(
@@ -119,8 +118,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
               FlatButton(
                 onPressed: onPositiveClick,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(scaleWidth(6))
-                ),
+                    borderRadius: BorderRadius.circular(scaleWidth(6))),
                 child: Text(
                   positiveTitle,
                   textScaleFactor: screenWidthRatio(),
