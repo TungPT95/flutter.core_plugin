@@ -1,7 +1,7 @@
 import 'package:core_plugin/core_plugin.dart';
 import 'package:flutter/widgets.dart';
 
-extension BuildContextExtension on BuildContext {
+extension NavigatorBuildContextExtension on BuildContext {
   Future<Bundle> push(PageIntent intent) {
     assert(intent.isNotNull);
     assert(intent.screen.isNotNull);
