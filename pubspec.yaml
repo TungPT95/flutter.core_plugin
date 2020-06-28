@@ -5,8 +5,8 @@ author: TungPham <phamthanhtung1995@gmail.com>
 homepage: https://tungpt.com
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.12.0"
+  sdk: ">=2.8.4 <3.0.0"
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
