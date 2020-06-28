@@ -22,9 +22,13 @@ abstract class Network {
 }
 
 class ResponseTransformer extends Transformer {
+  JsonDecodeCallback jsonDecodeCallback;
+
+  ResponseTransformer({this.jsonDecodeCallback});
+
   @override
   Future<String> transformRequest(RequestOptions options) async {
-    var data = options.data ?? "";
+    var data = options.data ?? '';
     if (data is! String) {
       if (_isJsonMime(options.contentType)) {
         return json.encode(options.data);
@@ -35,35 +39,46 @@ class ResponseTransformer extends Transformer {
     return data.toString();
   }
 
+  /// As an agreement, you must return the [response]
+  /// when the Options.responseType is [ResponseType.stream].
   @override
   Future transformResponse(
       RequestOptions options, ResponseBody response) async {
     if (options.responseType == ResponseType.stream) {
       return response;
     }
-    int length = 0;
-    int received = 0;
-    bool showDownloadProgress = options.onReceiveProgress != null;
+    var length = 0;
+    var received = 0;
+    var showDownloadProgress = options.onReceiveProgress != null;
     if (showDownloadProgress) {
       length = int.parse(
-          response.headers[Headers.contentLengthHeader]?.first ?? "-1");
+          response.headers[Headers.contentLengthHeader]?.first ?? '-1');
     }
-    Completer completer = Completer();
-    Stream stream = response.stream.transform(StreamTransformer.fromHandlers(
+    var completer = Completer();
+    var stream =
+        response.stream.transform<Uint8List>(StreamTransformer.fromHandlers(
       handleData: (data, sink) {
-        sink.add(Uint8List.fromList(data));
+        sink.add(data);
         if (showDownloadProgress) {
           received += data.length;
           options.onReceiveProgress(received, length);
         }
       },
     ));
-    List<int> buffer = List<int>();
-    StreamSubscription subscription;
-    subscription = stream.listen(
-      (element) => buffer.addAll(element),
-      onError: (e) => completer.completeError(e),
-      onDone: () => completer.complete(),
+    // let's keep references to the data chunks and concatenate them later
+    final chunks = <Uint8List>[];
+    var finalSize = 0;
+    StreamSubscription subscription = stream.listen(
+      (chunk) {
+        finalSize += chunk.length;
+        chunks.add(chunk);
+      },
+      onError: (e) {
+        completer.completeError(e);
+      },
+      onDone: () {
+        completer.complete();
+      },
       cancelOnError: true,
     );
     // ignore: unawaited_futures
@@ -78,30 +93,41 @@ class ResponseTransformer extends Transformer {
         await subscription.cancel();
         throw DioError(
           request: options,
-          error: "Receiving data timeout[${options.receiveTimeout}ms]",
+          error: 'Receiving data timeout[${options.receiveTimeout}ms]',
           type: DioErrorType.RECEIVE_TIMEOUT,
         );
       }
     } else {
       await completer.future;
     }
-    if (options.responseType == ResponseType.bytes) return buffer;
+    // we create a final Uint8List and copy all chunks into it
+    final responseBytes = Uint8List(finalSize);
+    var chunkOffset = 0;
+    for (var chunk in chunks) {
+      responseBytes.setAll(chunkOffset, chunk);
+      chunkOffset += chunk.length;
+    }
+
+    if (options.responseType == ResponseType.bytes) return responseBytes;
+
     String responseBody;
     if (options.responseDecoder != null) {
-      responseBody =
-          options.responseDecoder(buffer, options, response..stream = null);
+      responseBody = options.responseDecoder(
+          responseBytes, options, response..stream = null);
     } else {
-      responseBody = utf8.decode(buffer, allowMalformed: true);
+      responseBody = utf8.decode(responseBytes, allowMalformed: true);
     }
     if (responseBody != null &&
         responseBody.isNotEmpty &&
         options.responseType == ResponseType.json &&
         _isJsonMime(response.headers[Headers.contentTypeHeader]?.first)) {
-      return json.decode(responseBody);
-    } else {
-      try {
-        return json.decode(responseBody);
-      } catch (e) {}
+      if (jsonDecodeCallback != null) {
+        return jsonDecodeCallback(responseBody);
+      } else {
+        try {
+          return json.decode(responseBody);
+        } catch (e) {}
+      }
     }
     return responseBody;
   }
