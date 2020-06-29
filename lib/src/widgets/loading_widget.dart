@@ -77,7 +77,7 @@ class ErrorWidget extends StatelessWidget {
               onPressed: onRetry,
               color: buttonColor,
               child: Text(
-                isNullOrEmptyString(reloadTitle) ? 'Thử lại' : reloadTitle,
+                reloadTitle.isNullOrEmpty ? 'Thử lại' : reloadTitle,
                 style: TextStyle(color: buttonTextColor),
               ),
             ),

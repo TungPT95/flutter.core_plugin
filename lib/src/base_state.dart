@@ -86,7 +86,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           contentPadding:
               EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 0),
           actions: [
-            if (isNotNullString(negativeTitle))
+            if (negativeTitle.isNotNullAndEmpty)
               FlatButton(
                 onPressed: onNegativeClick,
                 child: Text(
@@ -94,7 +94,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                   textScaleFactor: context.screenWidthRatio,
                 ),
               ),
-            if (isNotNullString(positiveTitle))
+            if (positiveTitle.isNotNullAndEmpty)
               FlatButton(
                 onPressed: onPositiveClick,
                 shape: RoundedRectangleBorder(
