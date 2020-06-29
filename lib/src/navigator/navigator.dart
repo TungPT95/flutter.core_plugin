@@ -9,7 +9,7 @@ extension NavigatorBuildContextExtension on BuildContext {
         arguments: intent);
   }
 
-  ///replace screen đang hiện bởi [intent.screen]
+  ///replace screen hiện tại bởi [intent.screen]
   Future<Bundle> pushReplacement(PageIntent intent, {Bundle resultBundle}) {
     assert(intent.isNotNull);
     assert(intent.screen.isNotNull);
