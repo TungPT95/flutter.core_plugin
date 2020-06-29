@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class Routing {
-  ///override ở main, để get Map của all screen trong app
+  ///override ở main, để get screen trong app theo [Type]
   Widget getRoutes(Type screen) => screenNotFound;
 
   ///gọi để set ở [MaterialApp.onGenerateRoute]
