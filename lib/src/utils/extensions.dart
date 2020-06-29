@@ -80,9 +80,9 @@ extension IntExtension on int {
 extension BuildContextExtension on BuildContext {
   Size get screenSize => MediaQuery.of(this).size;
 
-  ThemeData get screenTheme => Theme.of(this);
+  ThemeData get theme => Theme.of(this);
 
-  TextTheme get textTheme => screenTheme.textTheme;
+  TextTheme get textTheme => theme.textTheme;
 
   double scaleWidth(double width) {
     return width * screenSize.width / designWidth;
