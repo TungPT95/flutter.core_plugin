@@ -17,9 +17,8 @@ extension NavigatorBuildContextExtension on BuildContext {
         result: resultBundle, arguments: intent);
   }
 
-  void pop(PageIntent intent) {
-    assert(intent.isNotNull);
-    if (Navigator.canPop(this)) Navigator.pop<Bundle>(this, intent.bundle);
+  void pop({Bundle resultBundle}) {
+    if (Navigator.canPop(this)) Navigator.pop<Bundle>(this, resultBundle);
   }
 
   ///push screen mới và pop các screen trước đó đến khi thoả điều kiện [predicate]

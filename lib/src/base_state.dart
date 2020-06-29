@@ -11,7 +11,6 @@ const double designWidth = 375.0;
 const double designHeight = 667.0;
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
-
   Bundle get bundle {
     try {
       return context.read<Bundle>();
@@ -56,7 +55,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   ///[resultBundle] kết quả trả về khi pop screen
   void popScreen({Bundle resultBundle}) {
-    context.pop(PageIntent(bundle: resultBundle));
+    context.pop(resultBundle: resultBundle);
   }
 
   ///[returnScreen] Type của page vừa đc push, sẽ return về result [resultBundle] từ page đó
