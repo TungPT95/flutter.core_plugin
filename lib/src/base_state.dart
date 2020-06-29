@@ -3,7 +3,6 @@ import 'package:core_plugin/src/navigator/bundle.dart';
 import 'package:core_plugin/src/navigator/navigator.dart';
 import 'package:core_plugin/src/navigator/page_intent.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 ///width of Iphone 5 device
 const double designWidth = 375.0;
