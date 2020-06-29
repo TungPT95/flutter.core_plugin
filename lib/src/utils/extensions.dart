@@ -104,3 +104,9 @@ extension BuildContextExtension on BuildContext {
     return screenSize.height * percent / 100;
   }
 }
+
+extension NumExtension on num {
+  bool get isOdd => this % 2 != 0;
+
+  bool get isEven => this % 2 == 0;
+}
