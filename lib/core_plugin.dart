@@ -9,8 +9,7 @@ export 'package:firebase_messaging/firebase_messaging.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_html/flutter_html.dart';
 export 'package:flutter_html/html_parser.dart';
-export 'package:flutter_local_notifications/flutter_local_notifications.dart'
-    hide Message;
+export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 export 'package:flutter_widgets/flutter_widgets.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:intl/intl.dart';
