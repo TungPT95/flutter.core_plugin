@@ -25,6 +25,8 @@ dependencies:
   equatable: ^1.2.0
 
   # bloc, state management
+  flutter_cubit: ^0.1.0
+  hydrated_cubit: ^0.1.2
   flutter_bloc: ^5.0.0
   bloc_test: ^6.0.0
 
