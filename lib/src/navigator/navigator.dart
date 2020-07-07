@@ -22,7 +22,7 @@ extension NavigatorBuildContextExtension on BuildContext {
     if (Navigator.canPop(this)) Navigator.pop<Bundle>(this, resultBundle);
   }
 
-  ///push screen mới và pop các screen trước đó đến khi thoả điều kiện [predicate]
+  ///push screen mới và pop các screen trước đó nếu thoả điều kiện [predicate]
   Future<Bundle> pushAndRemoveUntil(
       PageIntent intent, RoutePredicate predicate) {
     assert(intent.isNotNull);
