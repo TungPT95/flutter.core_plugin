@@ -39,7 +39,7 @@ extension NavigatorBuildContextExtension on BuildContext {
     return pushAndRemoveUntil(intent, (route) => route.isFirst);
   }
 
-  ///push screen mới lên top of stack
+  ///push screen mới lên top of stack và clear tất cả những screen bên dưới nó
   Future<Bundle> pushToTop(PageIntent intent) {
     assert(intent.isNotNull);
     assert(intent.screen.isNotNull);
