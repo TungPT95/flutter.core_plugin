@@ -11,15 +11,6 @@ const double designWidth = 375.0;
 const double designHeight = 667.0;
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
-  Bundle get bundle {
-    try {
-      return context.read<Bundle>();
-    } catch (e, s) {
-      print(s);
-    }
-    return null;
-  }
-
   Widget buildContent(Widget content) {
     assert(content != null);
     return WillPopScope(

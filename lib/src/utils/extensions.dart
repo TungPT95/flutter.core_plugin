@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:core_plugin/src/navigator/bundle.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../base_state.dart';
 
@@ -102,6 +104,15 @@ extension BuildContextExtension on BuildContext {
 
   double screenHeightFraction(double percent) {
     return screenSize.height * percent / 100;
+  }
+
+  Bundle get bundle {
+    try {
+      return this.read<Bundle>();
+    } catch (e, s) {
+      print(s);
+    }
+    return null;
   }
 }
 
