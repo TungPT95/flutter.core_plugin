@@ -114,6 +114,15 @@ extension BuildContextExtension on BuildContext {
     }
     return null;
   }
+
+  T getArguments<T>() {
+    try {
+      return this.bundle.args as T;
+    } catch (e, s) {
+      print(s);
+    }
+    return null;
+  }
 }
 
 extension NumExtension on num {
