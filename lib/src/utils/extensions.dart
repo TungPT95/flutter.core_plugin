@@ -51,7 +51,7 @@ extension StringExtension on String {
   }
 
   ///chuỗi string này có tồn tại [keyword] hay ko
-  bool contains(String keyword) {
+  bool contain(String keyword) {
     return this
         .removeVnAccent()
         .trim()
