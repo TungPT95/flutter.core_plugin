@@ -57,7 +57,6 @@ extension NavigatorBuildContextExtension on BuildContext {
   ///nếu [intent.screen] == null, thì sẽ pop tới trang đầu tiên
   void popUntilScreenOrFirst(PageIntent intent) {
     assert(intent.isNotNull);
-    assert(intent.screen.isNotNull);
     Navigator.popUntil(this, (route) {
       return '${intent.screen}' == route.settings.name || route.isFirst;
     });
