@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:core_plugin/src/navigator/bundle.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../base_state.dart';
@@ -129,4 +130,10 @@ extension NumExtension on num {
   bool get isOdd => this % 2 != 0;
 
   bool get isEven => this % 2 == 0;
+}
+
+extension DateTimeExtension on DateTime {
+  String toFormatString({String pattern}) {
+    return DateFormat(pattern ?? 'yyyy/MM/dd HH:mm;ss').toString();
+  }
 }
