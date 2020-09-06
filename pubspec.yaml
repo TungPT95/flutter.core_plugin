@@ -1,6 +1,6 @@
 name: core_plugin
 description: A new Flutter package.
-version: 0.4.9
+version: 0.4.10
 author: TungPham <phamthanhtung1995@gmail.com>
 homepage: https://tungpt.com
 
@@ -28,7 +28,7 @@ dependencies:
   flutter_bloc: ^6.0.5
   bloc_test: ^7.0.3
 
-  provider: ^4.3.2+1
+  provider: ^4.3.2+2
 
   rxdart: ^0.24.1
 
