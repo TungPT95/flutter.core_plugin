@@ -1,6 +1,6 @@
 # app_utils
 
-A new Flutter package. 1
+A new Flutter package.
 
 ## Getting Started
 
