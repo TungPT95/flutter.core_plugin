@@ -134,6 +134,6 @@ extension NumExtension on num {
 
 extension DateTimeExtension on DateTime {
   String toFormatString({String pattern}) {
-    return DateFormat(pattern ?? 'yyyy/MM/dd HH:mm;ss').format(this);
+    return DateFormat(pattern ?? 'yyyy/MM/dd HH:mm:ss').format(this);
   }
 }
