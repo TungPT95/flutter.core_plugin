@@ -58,7 +58,7 @@ bool parseBoolFromInt(int input) {
 }
 
 int parseBoolToInt(bool input) {
-  return input ? 1 : 0;
+  return input.isNotNull ? (input ? 1 : 0) : null;
 }
 
 int parseDynamicToInt(input) {
