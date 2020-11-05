@@ -1,6 +1,6 @@
 name: core_plugin
 description: A new Flutter package.
-version: 0.4.12
+version: 0.4.13
 author: TungPham <phamthanhtung1995@gmail.com>
 homepage: https://tungpt.com
 
@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   intl: ^0.16.1
-  url_launcher: ^5.7.8
+  url_launcher: ^5.7.10
 
   # dio, http request
   dio: ^3.0.10
@@ -26,7 +26,7 @@ dependencies:
 
   # bloc, state management
   flutter_bloc: ^6.0.6
-  bloc_test: ^7.0.6
+  bloc_test: ^7.1.0
 
   provider: ^4.3.2+2
 
@@ -35,11 +35,11 @@ dependencies:
   # json serializable
   json_annotation: ^3.1.0
 
-  shared_preferences: ^0.5.12+2
+  shared_preferences: ^0.5.12+4
   cupertino_icons: ^1.0.0
 
   flutter_widgets: ^0.1.12
-  path_provider: ^1.6.22
+  path_provider: ^1.6.24
   toast: 0.1.5
 dev_dependencies:
   flutter_test:
