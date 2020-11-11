@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/navigator/bundle.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -110,10 +111,9 @@ extension BuildContextExtension on BuildContext {
   Bundle get bundle {
     try {
       return this.read<Bundle>();
-    } catch (e, s) {
-      print(s);
+    } catch (_) {
+      return this.watch<Bundle>();
     }
-    return null;
   }
 
   T getArguments<T>() {
@@ -135,5 +135,25 @@ extension NumExtension on num {
 extension DateTimeExtension on DateTime {
   String toFormatString({String pattern}) {
     return DateFormat(pattern ?? 'yyyy/MM/dd HH:mm:ss').format(this);
+  }
+}
+
+extension BlocExtension on BuildContext {
+  C bloc<C extends Cubit<Object>>() {
+    try {
+      return this.read<C>();
+    } catch (_) {
+      return this.watch<C>();
+    }
+  }
+}
+
+extension RepositoryExtension on BuildContext {
+  T repository<T>() {
+    try {
+      return this.read<T>();
+    } catch (_) {
+      return this.watch<T>();
+    }
   }
 }
