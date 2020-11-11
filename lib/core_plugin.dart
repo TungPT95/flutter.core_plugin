@@ -4,7 +4,8 @@ export 'package:bloc_test/bloc_test.dart';
 export 'package:dio_http2_adapter/dio_http2_adapter.dart';
 export 'package:dio_http_cache/dio_http_cache.dart';
 export 'package:equatable/equatable.dart';
-export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:flutter_bloc/flutter_bloc.dart'
+    hide RepositoryProviderExtension, BlocProviderExtension;
 export 'package:flutter_widgets/flutter_widgets.dart';
 export 'package:intl/intl.dart';
 export 'package:json_annotation/json_annotation.dart';
