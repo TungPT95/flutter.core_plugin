@@ -23,7 +23,7 @@ extension StringExtension on String {
   String plus(String s) => this + s;
 
   String removeVnAccent() {
-    final aRegex = '[áàả,ã,ạ,â,ấ,ầ,ẩ,ẫ,ậ,ă,ắ,ằ,ẳ,ẵ,ặ]';
+    final aRegex = '[á,à,ả,ã,ạ,â,ấ,ầ,ẩ,ẫ,ậ,ă,ắ,ằ,ẳ,ẵ,ặ]';
     final dRegex = '[đ]';
     final eRegex = '[é,è,ẻ,ẽ,ẹ,ê,ế,ề,ể,ễ,ệ]';
     final iRegex = '[í,ì,ỉ,ĩ,ị]';
