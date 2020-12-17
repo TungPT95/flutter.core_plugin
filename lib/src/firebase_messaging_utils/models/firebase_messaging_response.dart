@@ -7,13 +7,8 @@ abstract class FirebaseMessagingResponse {
   FirebaseMessagingAps aps;
 
   @JsonKey(ignore: true)
-  String get title => notification?.title;
+  String get title => notification?.title ?? aps?.alert?.title;
 
   @JsonKey(ignore: true)
-  String get body => notification?.body;
-
-  FirebaseMessagingResponse({
-    this.notification,
-    this.aps,
-  });
+  String get body => notification?.body ?? aps?.alert?.body;
 }
