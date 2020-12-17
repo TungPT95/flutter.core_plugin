@@ -21,6 +21,7 @@ export 'package:toast/toast.dart';
 export 'package:url_launcher/url_launcher.dart';
 
 export 'src/base_state.dart';
+export 'src/firebase_messaging_utils/firebase_messaging_utils.dart';
 export 'src/json_converter/converter.dart';
 export 'src/json_converter/json_converter_builder.dart';
 export 'src/json_converter/json_converter_factory.dart';
@@ -40,4 +41,4 @@ export 'src/utils/extensions.dart';
 export 'src/utils/text_utils.dart';
 export 'src/utils/validate_utils.dart';
 export 'src/widgets/loading_widget.dart';
-export 'src/widgets/unfocus_widget.dart';
+export 'src/widgets/loading_widget.dart';
