@@ -16,10 +16,8 @@ abstract class FirebaseMessagingModule {
 
   void setListener({FirebaseMessagingInterface view});
 
-  void setParser({FirebaseMessagingModuleParser parse});
-
   ///call đầu tiên ở main.dart
-  void initState();
+  void initState({FirebaseMessagingModuleParser parser});
 
   void disposed();
 }
@@ -31,7 +29,8 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
   _FirebaseMessagingModuleImpl._() : super._();
 
   @override
-  void initState() {
+  void initState({FirebaseMessagingModuleParser parser}) {
+    this._parser = parser;
     localNotificationsPlugin = FlutterLocalNotificationsPlugin();
     var initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -84,10 +83,5 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
   @override
   void setListener({FirebaseMessagingInterface view}) {
     this._view = view;
-  }
-
-  @override
-  void setParser({FirebaseMessagingModuleParser parse}) {
-    this._parser = parse;
   }
 }
