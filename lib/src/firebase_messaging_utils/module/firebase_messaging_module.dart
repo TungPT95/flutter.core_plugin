@@ -14,6 +14,7 @@ abstract class FirebaseMessagingModule {
   FlutterLocalNotificationsPlugin localNotificationsPlugin;
   FirebaseMessaging firebaseMessaging;
 
+  ///lắng nghe event khi user click vào notification, nên set ở root screen
   void setListener({FirebaseMessagingInterface view});
 
   ///call đầu tiên ở main.dart
