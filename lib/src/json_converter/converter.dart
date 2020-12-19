@@ -62,8 +62,8 @@ int parseBoolToInt(bool input) {
 }
 
 int parseDynamicToInt(input) {
-  if (input is int)
-    return input;
+  if (input is num)
+    return input.toInt();
   else if (input is String) {
     try {
       return int.tryParse(input);
@@ -75,8 +75,8 @@ int parseDynamicToInt(input) {
 }
 
 int parseDynamicToSecond(input) {
-  if (input is int)
-    return input;
+  if (input is num)
+    return input.toInt();
   else if (input is String) {
     try {
       return DateTime.parse(input).millisecondsSinceEpoch ~/ 1000;
