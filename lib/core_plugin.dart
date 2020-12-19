@@ -5,8 +5,10 @@ export 'package:dio/dio.dart' hide Headers;
 export 'package:dio_http2_adapter/dio_http2_adapter.dart';
 export 'package:dio_http_cache/dio_http_cache.dart';
 export 'package:equatable/equatable.dart';
+export 'package:firebase_messaging/firebase_messaging.dart';
 export 'package:flutter_bloc/flutter_bloc.dart'
     hide RepositoryProviderExtension, BlocProviderExtension;
+export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 export 'package:flutter_widgets/flutter_widgets.dart';
 export 'package:intl/intl.dart';
 export 'package:json_annotation/json_annotation.dart';
