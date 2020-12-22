@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/firebase_messaging_utils/firebase_messaging_interface.dart';
+import 'package:core_plugin/src/firebase_messaging_utils/firebase_messaging_notification_helper.dart';
 import 'package:core_plugin/src/firebase_messaging_utils/module/firebase_messaging_module_parser.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -17,6 +18,8 @@ abstract class FirebaseMessagingModule {
   ///lắng nghe event khi user click vào notification, nên set ở root screen
   void setListener({FirebaseMessagingInterface view});
 
+  void setNotificationHelper(FirebaseMessagingNotificationHelper helper);
+
   ///call đầu tiên ở main.dart
   void initState({FirebaseMessagingModuleParser parser});
 
@@ -26,6 +29,7 @@ abstract class FirebaseMessagingModule {
 class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
   FirebaseMessagingModuleParser _parser;
   FirebaseMessagingInterface _view;
+  FirebaseMessagingNotificationHelper _notificationHelper;
 
   _FirebaseMessagingModuleImpl._() : super._();
 
@@ -44,8 +48,10 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
     firebaseMessaging.configure(
       onMessage: (message) async {
         final object =
-            _parser.onMessage(FirebaseMessagingUtils.decodeJson(message));
-        _showLocalNotification(response: object.response, data: object.data);
+        _parser.onMessage(FirebaseMessagingUtils.decodeJson(message));
+        if (_notificationHelper?.canShowNotification(object.data) ?? true) {
+          _showLocalNotification(response: object.response, data: object.data);
+        }
       },
       onResume: (message) async {
         final object =
@@ -75,7 +81,7 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
         priority: Priority.high, importance: Importance.max);
     final iosDetail = IOSNotificationDetails();
     final platformDetail =
-        NotificationDetails(android: androidDetail, iOS: iosDetail);
+    NotificationDetails(android: androidDetail, iOS: iosDetail);
     localNotificationsPlugin.show(int.parse(notificationId), response.title,
         response.body, platformDetail,
         payload: jsonEncode(data));
@@ -84,5 +90,10 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
   @override
   void setListener({FirebaseMessagingInterface view}) {
     this._view = view;
+  }
+
+  @override
+  void setNotificationHelper(FirebaseMessagingNotificationHelper helper) {
+    this._notificationHelper = helper;
   }
 }
