@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/firebase_messaging_utils/firebase_messaging_interface.dart';
-import 'package:core_plugin/src/firebase_messaging_utils/module/firebase_messaging_module_interface.dart';
+import 'package:core_plugin/src/firebase_messaging_utils/module/firebase_messaging_module_parser.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 abstract class FirebaseMessagingModule {

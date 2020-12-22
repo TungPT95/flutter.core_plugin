@@ -10,7 +10,7 @@ export 'package:core_plugin/src/firebase_messaging_utils/models/firebase_messagi
 export 'package:core_plugin/src/firebase_messaging_utils/models/notification/firebase_messaging_notification.dart';
 export 'package:core_plugin/src/firebase_messaging_utils/models/notification/firebase_messaging_notification.dart';
 export 'package:core_plugin/src/firebase_messaging_utils/module/firebase_messaging_module.dart';
-export 'package:core_plugin/src/firebase_messaging_utils/module/firebase_messaging_module_interface.dart';
+export 'package:core_plugin/src/firebase_messaging_utils/module/firebase_messaging_module_parser.dart';
 
 ///
 /// class chính để parse trực tiếp json từ Firebase Messaging
