@@ -59,6 +59,7 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
           object =
               _parser.onMessage(FirebaseMessagingUtils.decodeJson(message));
         } catch (e, s) {
+          print(e);
           print(s);
         }
         if (_notificationHelper?.canShowNotification(object.data) ?? true) {
