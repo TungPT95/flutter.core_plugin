@@ -8,7 +8,13 @@ import 'package:core_plugin/src/firebase_messaging_utils/module/firebase_messagi
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 abstract class FirebaseMessagingModule {
-  factory FirebaseMessagingModule.init() = _FirebaseMessagingModuleImpl._;
+  static FirebaseMessagingModule _internal;
+
+  ///call ngay ở main(), trc hàm runApp()
+  static FirebaseMessagingModule init() =>
+      _internal ??= _FirebaseMessagingModuleImpl._();
+
+  static FirebaseMessagingModule get instance => _internal;
 
   FirebaseMessagingModule._();
 
