@@ -94,7 +94,8 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
 
   void _showLocalNotification(
       {FirebaseMessagingResponse response, Map<String, dynamic> data}) {
-    final notificationId = DateTime.now().second.toString();
+    final notificationId =
+        (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString();
     final androidDetail = AndroidNotificationDetails(
         notificationId, 'FcmNotification', '',
         priority: Priority.high, importance: Importance.max);
