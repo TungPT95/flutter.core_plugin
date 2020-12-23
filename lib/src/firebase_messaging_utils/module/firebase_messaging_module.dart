@@ -18,8 +18,13 @@ abstract class FirebaseMessagingModule {
   ///lắng nghe event khi user click vào notification, nên set ở root screen
   void setListener({FirebaseMessagingInterface view});
 
+  ///remove khi rời khỏi screen
+  void removeListener();
+
+  ///get điều kiện nào thì đc push notification
   void setNotificationHelper(FirebaseMessagingNotificationHelper helper);
 
+  ///remove khi rời khỏi screen
   void removeNotificationHelper();
 
   ///call đầu tiên ở main.dart
@@ -102,5 +107,10 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
   @override
   void removeNotificationHelper() {
     this._notificationHelper = null;
+  }
+
+  @override
+  void removeListener() {
+    this._view = null;
   }
 }
