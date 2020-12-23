@@ -20,6 +20,8 @@ abstract class FirebaseMessagingModule {
 
   void setNotificationHelper(FirebaseMessagingNotificationHelper helper);
 
+  void removeNotificationHelper();
+
   ///call đầu tiên ở main.dart
   void initState({FirebaseMessagingModuleParser parser});
 
@@ -48,7 +50,7 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
     firebaseMessaging.configure(
       onMessage: (message) async {
         final object =
-        _parser.onMessage(FirebaseMessagingUtils.decodeJson(message));
+            _parser.onMessage(FirebaseMessagingUtils.decodeJson(message));
         if (_notificationHelper?.canShowNotification(object.data) ?? true) {
           _showLocalNotification(response: object.response, data: object.data);
         }
@@ -81,7 +83,7 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
         priority: Priority.high, importance: Importance.max);
     final iosDetail = IOSNotificationDetails();
     final platformDetail =
-    NotificationDetails(android: androidDetail, iOS: iosDetail);
+        NotificationDetails(android: androidDetail, iOS: iosDetail);
     localNotificationsPlugin.show(int.parse(notificationId), response.title,
         response.body, platformDetail,
         payload: jsonEncode(data));
@@ -95,5 +97,10 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
   @override
   void setNotificationHelper(FirebaseMessagingNotificationHelper helper) {
     this._notificationHelper = helper;
+  }
+
+  @override
+  void removeNotificationHelper() {
+    this._notificationHelper = null;
   }
 }
