@@ -54,8 +54,13 @@ class _FirebaseMessagingModuleImpl extends FirebaseMessagingModule {
     firebaseMessaging = FirebaseMessaging();
     firebaseMessaging.configure(
       onMessage: (message) async {
-        final object =
-            _parser.onMessage(FirebaseMessagingUtils.decodeJson(message));
+        FirebaseMessagingPairObject object;
+        try {
+          object =
+              _parser.onMessage(FirebaseMessagingUtils.decodeJson(message));
+        } catch (e, s) {
+          print(s);
+        }
         if (_notificationHelper?.canShowNotification(object.data) ?? true) {
           _showLocalNotification(response: object.response, data: object.data);
         }
