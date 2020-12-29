@@ -124,6 +124,8 @@ extension BuildContextExtension on BuildContext {
     }
     return null;
   }
+
+  RefreshBloc get refresh => bloc<RefreshBloc>();
 }
 
 extension NumExtension on num {
