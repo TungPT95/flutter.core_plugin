@@ -1,3 +1,4 @@
+import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/pagination/refresh/refresh_interface.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,9 @@ class PullDownRefreshWidget extends StatelessWidget {
     return RefreshIndicator(
       child: child,
       onRefresh: () async {
+        if (onRefresh.isNotNull) {
+          return await onRefresh?.call();
+        }
         await controller.refresh();
       },
     );
