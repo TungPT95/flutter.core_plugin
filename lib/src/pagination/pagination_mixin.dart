@@ -53,6 +53,14 @@ mixin PaginationMixin<T> implements PaginationInterface, RefreshInterface {
   ///override to handle your additional logic
   bool loadWhen() => !isEndOfList;
 
+  ///no need to override
+  void addMore({List<T> nextItems}) {
+    if (nextItems.isNull) {
+      return;
+    }
+    (_items ??= []).addAll(nextItems);
+  }
+
   ///clear list and reset page = 1
   ///no need to override
   void reset() {
@@ -64,14 +72,6 @@ mixin PaginationMixin<T> implements PaginationInterface, RefreshInterface {
   ///no need to override
   void _startLoading() {
     _completer = Completer();
-  }
-
-  ///no need to override
-  void addMore({List<T> nextItems}) {
-    if (nextItems.isNull) {
-      return;
-    }
-    (_items ??= []).addAll(nextItems);
   }
 
   ///no need to override
