@@ -14,28 +14,36 @@ mixin PaginationMixin<T> implements PaginationInterface, RefreshInterface {
 
   List<T> get items => _items;
 
+  ///must call super before handle your extend logic
+  @mustCallSuper
   void load() {
     _startLoading();
   }
 
-  ///must call super before handle your logic
-  ///override to handle your additional logic, e.g: calling api from page 1
+  ///must call super before handle your extend logic
   @mustCallSuper
   Future<void> refresh() async {
-    _completer = Completer();
     load();
     await _refreshComplete;
     reset();
   }
 
   ///action for calling api
-  ///must call super before handle your logic
-  ///override to handle your additional logic, e.g: load the next page
+  ///must call super before handle your extend logic
   @mustCallSuper
   @override
   void nextPage() {
     if (loadWhen() ?? false) {
       page += limit;
+      load();
+    }
+  }
+
+  ///no need to override
+  ///call when calling your api completely
+  void completeLoading() {
+    if (!(_completer?.isCompleted ?? true)) {
+      _completer?.complete();
     }
   }
 
@@ -56,14 +64,6 @@ mixin PaginationMixin<T> implements PaginationInterface, RefreshInterface {
   ///no need to override
   void _startLoading() {
     _completer = Completer();
-  }
-
-  ///no need to override
-  ///call when calling your api completely
-  void _completeLoading() {
-    if (!(_completer?.isCompleted ?? true)) {
-      _completer?.complete();
-    }
   }
 
   ///no need to override
