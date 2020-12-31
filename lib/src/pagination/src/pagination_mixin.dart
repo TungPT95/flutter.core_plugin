@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:core_plugin/core_plugin.dart';
-import 'package:core_plugin/src/pagination/pagination_interface.dart';
-import 'package:core_plugin/src/pagination/refresh/refresh_interface.dart';
+import 'package:core_plugin/src/pagination/src/pagination_interface.dart';
+import 'package:core_plugin/src/pagination/src/refresh/refresh_interface.dart';
 import 'package:flutter/foundation.dart';
 
 mixin PaginationMixin<T> implements PaginationInterface, RefreshInterface {
