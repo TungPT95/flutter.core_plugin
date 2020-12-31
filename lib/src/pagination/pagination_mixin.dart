@@ -14,11 +14,11 @@ mixin PaginationMixin<T> implements PaginationInterface, RefreshInterface {
 
   List<T> get items => _items;
 
+  void loadCompete();
+
   void load() {
     _startLoading();
   }
-
-  Future get _refreshComplete => _completer.future;
 
   ///must call super before handle your logic
   ///override to handle your additional logic, e.g: calling api from page 1
@@ -36,14 +36,16 @@ mixin PaginationMixin<T> implements PaginationInterface, RefreshInterface {
   @mustCallSuper
   @override
   void nextPage() {
-    if (_loadWhen() ?? false) {
+    if (loadWhen() ?? false) {
       page += limit;
     }
   }
 
+  Future get _refreshComplete => _completer.future;
+
   ///condition for loading more
   ///override to handle your additional logic
-  bool _loadWhen() => !isEndOfList;
+  bool loadWhen() => !isEndOfList;
 
   ///clear list and reset page = 1
   ///no need to override
