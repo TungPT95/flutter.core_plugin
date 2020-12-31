@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
   ScrollController _scrollController;
 
+  ScrollController get internalScrollController =>
+      _scrollController = scrollController ?? ScrollController();
+
   ///override lại để lấy [ScrollController] truyền từ bên ngoài vào
-  ///nếu ko thì [_scrollController] sẽ tự initialized ở [initState]
+  ///nếu ko thì [_scrollController] sẽ tự initialized ở [internalScrollController]
   ScrollController get scrollController;
 
   void onNextPage();
@@ -13,11 +16,10 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
     super.initState();
-    _scrollController = scrollController ?? ScrollController();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels >=
-              _scrollController.position.maxScrollExtent &&
-          !_scrollController.position.outOfRange) {
+    internalScrollController.addListener(() {
+      if (internalScrollController.position.pixels >=
+              internalScrollController.position.maxScrollExtent &&
+          !internalScrollController.position.outOfRange) {
         onNextPage();
       }
     });
