@@ -14,8 +14,6 @@ mixin PaginationMixin<T> implements PaginationInterface, RefreshInterface {
 
   List<T> get items => _items;
 
-  void loadCompete();
-
   void load() {
     _startLoading();
   }
