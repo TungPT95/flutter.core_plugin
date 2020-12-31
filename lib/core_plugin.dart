@@ -35,6 +35,7 @@ export 'src/navigator/navigator.dart';
 export 'src/navigator/page_intent.dart';
 export 'src/navigator/routing.dart';
 export 'src/network/network.dart';
+export 'src/pagination/pagination.dart';
 export 'src/share_pref/share_pref.dart';
 export 'src/utils/app_utils.dart';
 export 'src/utils/currency_utils.dart';
