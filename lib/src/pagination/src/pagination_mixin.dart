@@ -4,7 +4,7 @@ import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/pagination/src/view/pagination_refresh_interface.dart';
 import 'package:flutter/foundation.dart';
 
-mixin PaginationMixin<T> implements PaginationRefreshInterface<T> {
+mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
   Completer _completer;
 
   @override
@@ -26,8 +26,8 @@ mixin PaginationMixin<T> implements PaginationRefreshInterface<T> {
   int _limit = 10;
 
   @override
-  List<T> get items => _items;
-  List<T> _items;
+  List<Model> get items => _items;
+  List<Model> _items;
 
   ///must call super before handle your extend logic
   @mustCallSuper
@@ -69,7 +69,7 @@ mixin PaginationMixin<T> implements PaginationRefreshInterface<T> {
   bool loadWhen() => !ended;
 
   ///no need to override
-  void addMore({List<T> nextItems}) {
+  void addMore({List<Model> nextItems}) {
     if (nextItems.isNull) {
       return;
     }
