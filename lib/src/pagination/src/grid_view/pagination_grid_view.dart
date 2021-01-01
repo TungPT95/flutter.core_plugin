@@ -4,15 +4,16 @@ import 'package:core_plugin/src/pagination/src/pagination_view_mixin.dart';
 import 'package:flutter/material.dart';
 
 ///only used for vertical GridView
-class PaginationGridView<T extends Object> extends StatefulWidget {
-  final PaginationInterface<T> controller;
+class PaginationGridView<Model extends Object> extends StatefulWidget {
+  final PaginationInterface<Model> controller;
   final EdgeInsets padding;
 
   ///pass into if you want to control another things exclude pagination
   final ScrollController scrollController;
 
   ///build your main item
-  final Widget Function(BuildContext context, int index, T item) itemBuilder;
+  final Widget Function(BuildContext context, int index, Model item)
+      itemBuilder;
   final SliverGridDelegateWithFixedCrossAxisCount gridDelegate;
 
   ///pass into if you don't wanna use the default loading indicator [VueCircularProgressIndicator]
@@ -35,16 +36,21 @@ class PaginationGridView<T extends Object> extends StatefulWidget {
       this.padding = EdgeInsets.zero,
       this.showInitialLoadingEffectItem = false,
       this.loadingEffectItemBuilder})
-      : assert(
+      : assert(controller != null),
+        assert(itemBuilder != null),
+        assert(gridDelegate != null),
+        assert(
             !showInitialLoadingEffectItem || loadingEffectItemBuilder != null,
             '\nyou have to pass `loadingEffectItemBuilder` if you set `showInitialLoadingEffectItem` = true ');
 
   @override
-  _PaginationGridViewState createState() => _PaginationGridViewState();
+  _PaginationGridViewState<Model> createState() =>
+      _PaginationGridViewState<Model>();
 }
 
-class _PaginationGridViewState extends State<PaginationGridView>
-    with PaginationViewMixin {
+class _PaginationGridViewState<Model extends Object>
+    extends State<PaginationGridView>
+    with PaginationViewMixin<Model, PaginationGridView> {
   double get _itemRatio => widget.gridDelegate.childAspectRatio;
 
   double get _itemWidth {
@@ -87,7 +93,7 @@ class _PaginationGridViewState extends State<PaginationGridView>
               ),
             );
           }
-          if (index == _itemCount - 1) {
+          if (index == itemCount - 1) {
             return widget.loadingIndicatorBuilder?.call(context) ??
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -112,7 +118,7 @@ class _PaginationGridViewState extends State<PaginationGridView>
                 final isLastItemInRow =
                     i == widget.gridDelegate.crossAxisCount - 1;
                 //[itemIndex] vẫn thuộc items;
-                final isValidIndex = itemIndex < widget.controller.items.length;
+                final isValidIndex = itemIndex < controller.items.length;
                 return Expanded(
                     child: isValidIndex
                         ? Padding(
@@ -122,7 +128,7 @@ class _PaginationGridViewState extends State<PaginationGridView>
                                     right:
                                         widget.gridDelegate.crossAxisSpacing),
                             child: widget.itemBuilder?.call(context, itemIndex,
-                                widget.controller.items.elementAt(itemIndex)))
+                                controller.items.elementAt(itemIndex)))
                         : SizedBox());
               }),
             ),
@@ -130,27 +136,27 @@ class _PaginationGridViewState extends State<PaginationGridView>
         },
         separatorBuilder: (context, index) =>
             SizedBox(height: widget.gridDelegate.mainAxisSpacing),
-        itemCount: _itemCount);
+        itemCount: itemCount);
   }
 
   ///tính itemCount trong 2 trường hợp
   ///khi loading [showInitialLoadingEffectItem] =true: show shimmer khi loading lần đầu tiên
   ///khi chưa phải là page cuối cùng, thì cuối list cần phải show loading indicator
-  int get _itemCount {
-    if (widget.showInitialLoadingEffectItem) {
-      return widget.controller?.limit;
-    } else if (widget.controller.items.isNullOrEmpty) {
-      return 0;
-    }
-    return ((widget.controller.items.length /
-                widget.gridDelegate.crossAxisCount)
-            .ceil() +
-        (!widget.controller.ended ? 1 : 0));
+  @override
+  int get itemCount {
+    if (super.itemCount.isNull)
+      return ((controller.items.length / widget.gridDelegate.crossAxisCount)
+              .ceil() +
+          (!controller.ended ? 1 : 0));
+    return super.itemCount;
   }
 
   @override
-  void onNextPage() => widget.controller?.nextPage();
+  ScrollController get externalScrollController => widget.scrollController;
 
   @override
-  ScrollController get scrollController => widget.scrollController;
+  PaginationInterface<Model> get controller => widget.controller;
+
+  @override
+  bool get showInitialLoadingEffectItem => widget.showInitialLoadingEffectItem;
 }
