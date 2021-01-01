@@ -44,13 +44,11 @@ class PaginationGridView<Model extends Object> extends StatefulWidget {
             '\nyou have to pass `loadingEffectItemBuilder` if you set `showInitialLoadingEffectItem` = true ');
 
   @override
-  _PaginationGridViewState<Model> createState() =>
-      _PaginationGridViewState<Model>();
+  _PaginationGridViewState createState() => _PaginationGridViewState();
 }
 
-class _PaginationGridViewState<Model extends Object>
-    extends State<PaginationGridView>
-    with PaginationViewMixin<Model, PaginationGridView> {
+class _PaginationGridViewState extends State<PaginationGridView>
+    with PaginationViewMixin<PaginationGridView> {
   double get _itemRatio => widget.gridDelegate.childAspectRatio;
 
   double get _itemWidth {
@@ -155,7 +153,7 @@ class _PaginationGridViewState<Model extends Object>
   ScrollController get externalScrollController => widget.scrollController;
 
   @override
-  PaginationInterface<Model> get controller => widget.controller;
+  PaginationInterface get controller => widget.controller;
 
   @override
   bool get showInitialLoadingEffectItem => widget.showInitialLoadingEffectItem;
