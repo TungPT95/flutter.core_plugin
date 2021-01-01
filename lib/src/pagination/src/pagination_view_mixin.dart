@@ -1,17 +1,39 @@
 import 'package:core_plugin/core_plugin.dart';
+import 'package:core_plugin/src/pagination/src/pagination_interface.dart';
 import 'package:flutter/material.dart';
 
-mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
-  ScrollController _scrollController;
+mixin PaginationViewMixin<Model extends Object, T extends StatefulWidget>
+    on State<T> {
+  ///override để lấy [widget.controller] đc truyền từ ngoài vào
+  PaginationInterface<Model> get controller;
 
-  ScrollController get internalScrollController =>
-      _scrollController = scrollController ?? ScrollController();
+  ///override để tính chiều dài của list
+  @mustCallSuper
+  int get itemCount {
+    if (showInitialLoadingEffectItem) {
+      return controller?.limit;
+    } else if (controller.items.isNullOrEmpty) {
+      return 0;
+    }
+    return null;
+  }
+
+  ///override để lấy [widget.showInitialLoadingEffectItem] đc truyền từ ngoài vào
+  bool get showInitialLoadingEffectItem;
 
   ///override lại để lấy [ScrollController] truyền từ bên ngoài vào
-  ///nếu ko thì [_scrollController] sẽ tự initialized ở [internalScrollController]
-  ScrollController get scrollController;
+  ///nếu ko thì [_internalScrollController] sẽ tự initialized ở [internalScrollController]
+  ScrollController get externalScrollController;
 
-  void onNextPage();
+  /// NHỮNG FUNCTION KO CẦN PHẢI OVERRIDE (BEGIN)
+
+  ScrollController _internalScrollController;
+
+  ///không cần phải override
+  ScrollController get internalScrollController => _internalScrollController =
+      externalScrollController ?? ScrollController();
+
+  /// NHỮNG FUNCTION KO CẦN PHẢI OVERRIDE (END)
 
   @override
   void initState() {
@@ -20,7 +42,7 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
       if (internalScrollController.position.pixels >=
               internalScrollController.position.maxScrollExtent &&
           !internalScrollController.position.outOfRange) {
-        onNextPage();
+        controller.nextPage();
       }
     });
   }
@@ -28,8 +50,9 @@ mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
   @override
   void dispose() {
     //call disposing nếu controller ko đc truyền từ bên ngoài
-    if (scrollController.isNull || _scrollController.isNotNull) {
-      _scrollController?.dispose();
+    if (externalScrollController.isNull ||
+        _internalScrollController.isNotNull) {
+      _internalScrollController?.dispose();
     }
     super.dispose();
   }
