@@ -2,10 +2,9 @@ import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/pagination/src/pagination_interface.dart';
 import 'package:flutter/material.dart';
 
-mixin PaginationViewMixin<Model extends Object, T extends StatefulWidget>
-    on State<T> {
+mixin PaginationViewMixin<T extends StatefulWidget> on State<T> {
   ///override để lấy [widget.controller] đc truyền từ ngoài vào
-  PaginationInterface<Model> get controller;
+  PaginationInterface get controller;
 
   ///override để tính chiều dài của list
   @mustCallSuper
