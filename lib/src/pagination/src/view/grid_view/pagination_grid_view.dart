@@ -4,7 +4,7 @@ import 'package:core_plugin/src/pagination/src/view/mixin/pagination_view_mixin.
 import 'package:flutter/material.dart';
 
 ///only used for vertical GridView
-class PaginationGridView<Model extends Object> extends StatefulWidget {
+class PaginationGridView<Model> extends StatefulWidget {
   final PaginationInterface<Model> controller;
   final EdgeInsets padding;
 
