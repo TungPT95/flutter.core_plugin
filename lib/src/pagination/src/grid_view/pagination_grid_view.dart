@@ -27,8 +27,6 @@ class PaginationGridView<T extends Object> extends StatefulWidget {
   ///have to pass into if [showInitialLoadingEffectItem] is true
   final IndexedWidgetBuilder loadingEffectItemBuilder;
 
-  final int loadingEffectItemCount;
-
   PaginationGridView(
       {@required this.controller,
       @required this.itemBuilder,
@@ -37,8 +35,7 @@ class PaginationGridView<T extends Object> extends StatefulWidget {
       this.loadingIndicatorBuilder,
       this.padding = EdgeInsets.zero,
       this.showInitialLoadingEffectItem = false,
-      this.loadingEffectItemBuilder,
-      this.loadingEffectItemCount = 10})
+      this.loadingEffectItemBuilder})
       : assert(
             !showInitialLoadingEffectItem || loadingEffectItemBuilder != null,
             '\nyou have to pass `loadingEffectItemBuilder` if you set `showInitialLoadingEffectItem` = true ');
@@ -142,7 +139,7 @@ class _PaginationGridViewState extends State<PaginationGridView>
   ///khi chưa phải là page cuối cùng, thì cuối list cần phải show loading indicator
   int get _itemCount {
     if (widget.showInitialLoadingEffectItem) {
-      return widget.loadingEffectItemCount;
+      return widget.controller?.limit;
     } else if (widget.controller.items.isNullOrEmpty) {
       return 0;
     }
