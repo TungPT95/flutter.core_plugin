@@ -8,12 +8,27 @@ import 'package:flutter/foundation.dart';
 mixin PaginationMixin<T> implements PaginationInterface<T>, RefreshInterface {
   Completer _completer;
 
-  int page = 0;
-  int limit = 10;
-  List<T> _items;
+  @override
+  int get page => _page;
+
+  set page(value) {
+    _page = value;
+  }
+
+  int _page = 0;
+
+  @override
+  int get limit => _limit;
+
+  set limit(value) {
+    limit = value;
+  }
+
+  int _limit = 10;
 
   @override
   List<T> get items => _items;
+  List<T> _items;
 
   ///must call super before handle your extend logic
   @mustCallSuper
@@ -35,7 +50,7 @@ mixin PaginationMixin<T> implements PaginationInterface<T>, RefreshInterface {
   @override
   void nextPage() {
     if (loadWhen() ?? false) {
-      page += limit;
+      _page += _limit;
       load();
     }
   }
@@ -65,7 +80,7 @@ mixin PaginationMixin<T> implements PaginationInterface<T>, RefreshInterface {
   ///clear list and reset page = 1
   ///no need to override
   void reset() {
-    page = 0;
+    _page = 0;
     clear();
   }
 
@@ -85,5 +100,5 @@ mixin PaginationMixin<T> implements PaginationInterface<T>, RefreshInterface {
   @override
   bool get ended => items.isNull
       ? false
-      : ((page == 0 && items.isEmpty) || items.length < page + limit);
+      : ((_page == 0 && items.isEmpty) || items.length < _page + _limit);
 }
