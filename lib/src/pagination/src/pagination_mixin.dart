@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:core_plugin/core_plugin.dart';
-import 'package:core_plugin/src/pagination/src/pagination_interface.dart';
-import 'package:core_plugin/src/pagination/src/view/refresh/refresh_interface.dart';
+import 'package:core_plugin/src/pagination/src/view/pagination_refresh_interface.dart';
 import 'package:flutter/foundation.dart';
 
-mixin PaginationMixin<T> implements PaginationInterface<T>, RefreshInterface {
+mixin PaginationMixin<T> implements PaginationRefreshInterface<T> {
   Completer _completer;
 
   @override
