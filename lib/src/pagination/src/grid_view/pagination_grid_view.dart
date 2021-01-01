@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 ///only used for vertical GridView
 class PaginationGridView<T extends Object> extends StatefulWidget {
-  ///your BLOC must be used this mixin [ListViewHelper]
   final PaginationInterface<T> controller;
   final EdgeInsets padding;
 
