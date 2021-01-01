@@ -44,13 +44,11 @@ class PaginationListView<Model extends Object> extends StatefulWidget {
             '\nyou have to pass `loadingEffectItemBuilder` if you set `showInitialLoadingEffectItem` = true ');
 
   @override
-  _PaginationListViewState<Model> createState() =>
-      _PaginationListViewState<Model>();
+  _PaginationListViewState createState() => _PaginationListViewState();
 }
 
-class _PaginationListViewState<Model extends Object>
-    extends State<PaginationListView>
-    with PaginationViewMixin<Model, PaginationListView> {
+class _PaginationListViewState extends State<PaginationListView>
+    with PaginationViewMixin<PaginationListView> {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -98,5 +96,5 @@ class _PaginationListViewState<Model extends Object>
   ScrollController get externalScrollController => widget.scrollController;
 
   @override
-  PaginationInterface<Model> get controller => widget.controller;
+  PaginationInterface get controller => widget.controller;
 }
