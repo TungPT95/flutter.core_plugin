@@ -49,7 +49,7 @@ class PaginationGridView<T extends Object> extends StatefulWidget {
 
 class _PaginationGridViewState extends State<PaginationGridView>
     with PaginationViewMixin {
-  double get _ratio => widget.gridDelegate.childAspectRatio;
+  double get _itemRatio => widget.gridDelegate.childAspectRatio;
 
   double get _itemWidth {
     final paddingLeftOfGrid = widget.padding?.left ?? 0;
@@ -61,7 +61,7 @@ class _PaginationGridViewState extends State<PaginationGridView>
         widget.gridDelegate.crossAxisCount;
   }
 
-  double get _itemHeight => _itemWidth / _ratio;
+  double get _itemHeight => _itemWidth / _itemRatio;
 
   @override
   Widget build(BuildContext context) {
