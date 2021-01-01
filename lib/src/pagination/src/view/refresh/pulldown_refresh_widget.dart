@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class PullDownRefreshWidget extends StatelessWidget {
   final Widget child;
+  ///nếu muốn handle extend login thì truyền vào
   final Future<void> Function() onRefresh;
   final RefreshInterface controller;
 
