@@ -7,7 +7,8 @@ class PullDownRefreshWidget extends StatelessWidget {
   final Future<void> Function() onRefresh;
   final RefreshInterface controller;
 
-  PullDownRefreshWidget({this.child, this.onRefresh, this.controller});
+  PullDownRefreshWidget({this.child, this.onRefresh, @required this.controller})
+      : assert(controller != null);
 
   @override
   Widget build(BuildContext context) {
