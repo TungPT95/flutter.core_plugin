@@ -4,8 +4,8 @@ import 'package:core_plugin/src/pagination/src/view/mixin/pagination_view_mixin.
 import 'package:flutter/material.dart';
 
 ///only used for vertical ListView
-class PaginationListView<Model extends Object> extends StatefulWidget {
-  final PaginationInterface<Model> controller;
+class PaginationListView<Model> extends StatefulWidget {
+  final PaginationInterface controller;
   final EdgeInsets padding;
 
   ///pass into if you want to control another things exclude pagination
