@@ -71,7 +71,7 @@ class _PaginationGridViewState<Model extends Object>
         controller: internalScrollController,
         padding: widget.padding,
         itemBuilder: (context, index) {
-          if (widget.showInitialLoadingEffectItem) {
+          if (showInitialLoadingEffectItem) {
             return Container(
               height: _itemHeight,
               child: Row(
