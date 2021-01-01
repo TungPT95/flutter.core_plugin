@@ -1,6 +1,6 @@
 import 'package:core_plugin/core_plugin.dart';
 import 'package:core_plugin/src/pagination/src/pagination_interface.dart';
-import 'package:core_plugin/src/pagination/src/pagination_view_mixin.dart';
+import 'package:core_plugin/src/pagination/src/view/pagination_view_mixin.dart';
 import 'package:flutter/material.dart';
 
 ///only used for vertical ListView
