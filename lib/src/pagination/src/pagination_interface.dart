@@ -1,7 +1,7 @@
-abstract class PaginationInterface<T> {
+abstract class PaginationInterface<Model> {
   void nextPage();
 
-  List<T> get items;
+  List<Model> get items;
 
   bool get ended;
 
