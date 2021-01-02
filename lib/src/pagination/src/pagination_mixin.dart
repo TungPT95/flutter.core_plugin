@@ -73,7 +73,7 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
   @override
   void nextPage() {
     if (loadWhen() ?? false) {
-      _page += _limit;
+      _page += 1;
       load();
     }
   }
