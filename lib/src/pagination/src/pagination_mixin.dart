@@ -37,6 +37,8 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
 
   ///condition for loading more
   ///phải override để biết đc khi nào có thể loadmore hay refresh lại page
+  ///call super sau cùng các condition khác
+  @mustCallSuper
   bool loadWhen() => !ended;
 
   ///no need to override
