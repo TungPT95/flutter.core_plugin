@@ -29,12 +29,34 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
   List<Model> get items => _items;
   List<Model> _items;
 
-  ///must call super before handle your extend logic
+  ///phải override lại để call api
   @mustCallSuper
   void load() {
     _startLoading();
   }
 
+  ///condition for loading more
+  ///phải override để biết đc khi nào có thể loadmore hay refresh lại page
+  bool loadWhen() => !ended;
+
+  ///no need to override
+  ///phải call khi load xong và trc khi call [addMore]
+  void completeLoading() {
+    if (!(_completer?.isCompleted ?? true)) {
+      _completer?.complete();
+    }
+  }
+
+  ///no need to override
+  ///phải call sau khi call [completeLoading] để add thêm item vào [_items]
+  void addMore({List<Model> nextItems}) {
+    if (nextItems.isNull) {
+      return;
+    }
+    (_items ??= []).addAll(nextItems);
+  }
+
+  ///không cần override
   ///must call super before handle your extend logic
   @mustCallSuper
   Future<void> refresh() async {
@@ -43,8 +65,8 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
     reset();
   }
 
+  ///không cần override
   ///action for calling api
-  ///must call super before handle your extend logic
   @mustCallSuper
   @override
   void nextPage() {
@@ -54,28 +76,9 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
     }
   }
 
-  ///no need to override
-  ///call when calling your api completely
-  void completeLoading() {
-    if (!(_completer?.isCompleted ?? true)) {
-      _completer?.complete();
-    }
-  }
-
   Future get _refreshComplete => _completer.future;
 
-  ///condition for loading more
-  ///override to handle your additional logic
-  bool loadWhen() => !ended;
-
-  ///no need to override
-  void addMore({List<Model> nextItems}) {
-    if (nextItems.isNull) {
-      return;
-    }
-    (_items ??= []).addAll(nextItems);
-  }
-
+  ///action for calling api
   ///clear list and reset page = 1
   ///no need to override
   void reset() {
@@ -83,13 +86,12 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
     clear();
   }
 
-  ///call when starting calling your api
-  ///no need to override
+  ///không cần override
   void _startLoading() {
     _completer = Completer();
   }
 
-  ///no need to override
+  ///không cần override
   ///clear [items], e.g: refresh the list need to clear list first
   void clear() {
     _items?.clear();
