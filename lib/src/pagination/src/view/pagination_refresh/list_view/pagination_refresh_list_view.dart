@@ -28,7 +28,7 @@ class PaginationRefreshListView<Model> extends StatefulWidget {
     this.scrollController,
     this.separatorBuilder,
     this.loadingIndicatorBuilder,
-    this.showInitialLoadingEffectItem,
+    this.showInitialLoadingEffectItem = false,
     this.loadingEffectItemBuilder,
     this.onRefresh,
   });

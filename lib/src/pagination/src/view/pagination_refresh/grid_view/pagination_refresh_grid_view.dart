@@ -26,7 +26,7 @@ class PaginationRefreshGridView<Model> extends StatefulWidget {
       this.itemBuilder,
       this.gridDelegate,
       this.loadingIndicatorBuilder,
-      this.showInitialLoadingEffectItem,
+      this.showInitialLoadingEffectItem = false,
       this.loadingEffectItemBuilder});
 
   @override
