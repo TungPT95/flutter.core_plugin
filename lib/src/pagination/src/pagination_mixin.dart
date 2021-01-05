@@ -62,9 +62,10 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
   ///must call super before handle your extend logic
   @mustCallSuper
   Future<void> refresh() async {
+    reset();
     load();
     await _refreshComplete;
-    reset();
+    clear();
   }
 
   ///không cần override
@@ -85,7 +86,6 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
   ///no need to override
   void reset() {
     _page = 0;
-    clear();
   }
 
   ///không cần override
