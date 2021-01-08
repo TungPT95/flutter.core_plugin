@@ -1,6 +1,7 @@
 library core_plugin;
 
 export 'package:bloc_test/bloc_test.dart';
+export 'package:cached_network_image/cached_network_image.dart';
 export 'package:dio/dio.dart' hide Headers;
 export 'package:dio_http2_adapter/dio_http2_adapter.dart';
 export 'package:dio_http_cache/dio_http_cache.dart';
