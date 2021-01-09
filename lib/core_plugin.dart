@@ -14,6 +14,7 @@ export 'package:flutter_widgets/flutter_widgets.dart';
 export 'package:intl/intl.dart';
 export 'package:json_annotation/json_annotation.dart';
 export 'package:logger/logger.dart';
+export 'package:package_info/package_info.dart';
 export 'package:path_provider/path_provider.dart';
 export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 export 'package:provider/provider.dart';
