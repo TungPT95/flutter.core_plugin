@@ -20,6 +20,7 @@ export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 export 'package:provider/provider.dart';
 export 'package:retrofit/retrofit.dart';
 export 'package:rxdart/rxdart.dart';
+export 'package:share/share.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:toast/toast.dart';
 export 'package:url_launcher/url_launcher.dart';
