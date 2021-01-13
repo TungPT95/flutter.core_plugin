@@ -91,7 +91,7 @@ class _PaginationGridViewState extends State<PaginationGridView>
               ),
             );
           }
-          if (index == itemCount - 1) {
+          if (index == _loadingIndicatorIndex) {
             return widget.loadingIndicatorBuilder?.call(context) ??
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -157,4 +157,9 @@ class _PaginationGridViewState extends State<PaginationGridView>
 
   @override
   bool get showInitialLoadingEffectItem => widget.showInitialLoadingEffectItem;
+
+  int get _loadingIndicatorIndex {
+    if (controller.ended) return -1;
+    return itemCount - 1;
+  }
 }
