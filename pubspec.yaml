@@ -1,6 +1,6 @@
 name: core_plugin
 description: A new Flutter package.
-version: 0.4.16
+version: 0.5.0
 author: TungPham <phamthanhtung1995@gmail.com>
 homepage: https://tungpt.com
 
@@ -47,6 +47,7 @@ dependencies:
   store_redirect: ^1.0.2
   package_info: ^0.4.3+2
   share: ^0.6.5+4
+  flutter_widget_from_html: ^0.5.1+5
 
 dev_dependencies:
   flutter_test:
