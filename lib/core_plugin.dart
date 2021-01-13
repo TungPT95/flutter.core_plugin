@@ -10,6 +10,7 @@ export 'package:firebase_messaging/firebase_messaging.dart';
 export 'package:flutter_bloc/flutter_bloc.dart'
     hide RepositoryProviderExtension, BlocProviderExtension;
 export 'package:flutter_local_notifications/flutter_local_notifications.dart';
+export 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 export 'package:flutter_widgets/flutter_widgets.dart';
 export 'package:intl/intl.dart';
 export 'package:json_annotation/json_annotation.dart';
