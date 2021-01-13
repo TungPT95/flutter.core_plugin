@@ -124,6 +124,8 @@ extension BuildContextExtension on BuildContext {
     }
     return null;
   }
+
+  RefreshBloc get refresh => bloc<RefreshBloc>();
 }
 
 extension NumExtension on num {
@@ -143,7 +145,11 @@ extension BlocExtension on BuildContext {
     try {
       return this.read<C>();
     } catch (_) {
-      return this.watch<C>();
+      try {
+        return this.watch<C>();
+      } catch (_) {
+        return null;
+      }
     }
   }
 }
@@ -153,7 +159,11 @@ extension RepositoryExtension on BuildContext {
     try {
       return this.read<T>();
     } catch (_) {
-      return this.watch<T>();
+      try {
+        return this.watch<T>();
+      } catch (_) {
+        return null;
+      }
     }
   }
 }
