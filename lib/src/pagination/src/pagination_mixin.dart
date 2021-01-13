@@ -103,5 +103,5 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
   @override
   bool get ended => items.isNull
       ? false
-      : ((_page == 0 && items.isEmpty) || items.length < _page + _limit);
+      : ((_page == 0 && items.isEmpty) || items.length < _page * _limit);
 }
