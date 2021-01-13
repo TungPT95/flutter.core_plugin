@@ -53,6 +53,7 @@ class _PaginationListViewState extends State<PaginationListView>
   Widget build(BuildContext context) {
     return ListView.separated(
         controller: internalScrollController,
+        physics: AlwaysScrollableScrollPhysics(),
         padding: widget.padding,
         itemBuilder: (context, index) {
           if (showInitialLoadingEffectItem) {

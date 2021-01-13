@@ -67,6 +67,7 @@ class _PaginationGridViewState extends State<PaginationGridView>
   Widget build(BuildContext context) {
     return ListView.separated(
         controller: internalScrollController,
+        physics: AlwaysScrollableScrollPhysics(),
         padding: widget.padding,
         itemBuilder: (context, index) {
           if (showInitialLoadingEffectItem) {
