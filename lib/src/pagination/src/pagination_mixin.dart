@@ -46,6 +46,7 @@ mixin PaginationMixin<Model> implements PaginationRefreshInterface<Model> {
   void completeLoading() {
     if (!(_completer?.isCompleted ?? true)) {
       _completer?.complete();
+      _completer = null;
     }
   }
 
