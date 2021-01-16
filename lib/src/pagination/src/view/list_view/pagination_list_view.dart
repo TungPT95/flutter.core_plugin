@@ -64,6 +64,7 @@ class _PaginationListViewState extends State<PaginationListView>
             return widget.itemBuilder
                 ?.call(context, index, controller.items.elementAt(index));
           }
+          if (controller.refreshing) return null;
           return widget.loadingIndicatorBuilder?.call(context) ??
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
