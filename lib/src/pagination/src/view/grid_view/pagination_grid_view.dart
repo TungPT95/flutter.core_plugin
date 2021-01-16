@@ -93,6 +93,7 @@ class _PaginationGridViewState extends State<PaginationGridView>
             );
           }
           if (index == _loadingIndicatorIndex) {
+            if (controller.refreshing) return null;
             return widget.loadingIndicatorBuilder?.call(context) ??
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
