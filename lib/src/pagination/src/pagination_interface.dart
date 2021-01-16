@@ -2,7 +2,7 @@ abstract class PaginationInterface<Model> {
   void nextPage();
 
   List<Model> get items;
-
+  ///[ended] = true nếu đã load tới cuối page
   bool get ended;
 
   int get page;
