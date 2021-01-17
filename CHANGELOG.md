@@ -6,3 +6,6 @@
 * add `firebase_messaging_utils`
 * add `refresh_bloc.dart`, `refresh_mixin.dart` to refresh widget
 * add some packages
+
+## [0.6.0]
+* add `pagination`
